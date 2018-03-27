@@ -61,19 +61,24 @@ def getPlayerMove(game:Game,player:Player):
     #return newGame,newPlayer if we can't pass by reference
     #return;  
 
-def killCow(game:Game,player:Player)
+def killCow():
+    global game
+    #check whos turn
     return
+
 def runGame()-> None:
+    global game
     board.printOut(game.Board)
     if(game.turn==0):       #player 1's turn
         getPlayerMove(game,game.Player1)
-        #game.updatePlayer(player,(fromRow,fromCol),(toRow,toCol));  //update the board and player positions
+        #game.updatePlayer(game.Player1,(fromRow,fromCol),(toRow,toCol));  //update the board and player positions
         #if(game.checkFromMills(game,game.Player1)):
-          #  killCow(game,game.Player);
+            killCow();
     else:                   #player 2's turn
         getPlayerMove(game,game.Player2)
-        if(game.checkFromMills(game,game.Player1)):
-         #   killCow(game,game.Player);
+        #game.updatePlayer(game.Player2,(fromRow,fromCol),(toRow,toCol));  //update the board and player positions
+        #if(game.checkFromMills(game,game.Player1)):
+            killCow();
     
     
     #game.
