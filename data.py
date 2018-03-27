@@ -55,66 +55,66 @@ class Board:
 
     def startBoard(self):
 
-        A1.PossibleMoves = [A4, B2, D1]
-        A4.PossibleMoves = [A1, A7, B4]
-        A7.PossibleMoves = [A4, B6, D7]
+        self.A1.PossibleMoves = [self.A4, self.B2, self.D1]
+        self.A4.PossibleMoves = [self.A1, self.A7, self.B4]
+        self.A7.PossibleMoves = [self.A4, self.B6, self.D7]
 
-        B2.PossibleMoves = [A1, B4, C3, D2]
-        B4.PossibleMoves = [A4, B2, B6, C4]
-        B6.PossibleMoves = [A7, B4, D6, C5]
+        self.B2.PossibleMoves = [self.A1, self.B4, self.C3, self.D2]
+        self.B4.PossibleMoves = [self.A4, self.B2, self.B6, self.C4]
+        self.B6.PossibleMoves = [self.A7, self.B4, self.D6, self.C5]
 
-        C3.PossibleMoves = [B2, C4, D3]
-        C4.PossibleMoves = [B4, C3, C5]
-        C5.PossibleMoves = [B6, C4, D5]
+        self.C3.PossibleMoves = [self.B2, self.C4, self.D3]
+        self.C4.PossibleMoves = [self.B4, self.C3, self.C5]
+        self.C5.PossibleMoves = [self.B6, self.C4, self.D5]
 
-        D1.PossibleMoves = [A1, D2, G1]
-        D2.PossibleMoves = [B2, D1, D3, F2] 
-        D3.PossibleMoves = [C3, D2, E3]
+        self.D1.PossibleMoves = [self.A1, self.D2, self.G1]
+        self.D2.PossibleMoves = [self.B2, self.D1, self.D3, self.F2] 
+        self.D3.PossibleMoves = [self.C3, self.D2, self.E3]
 
-        D5.PossibleMoves = [C5, D6, E5]
-        D6.PossibleMoves = [B6, D5, D7, F6]
-        D7.PossibleMoves = [A7, D6, G7]
+        self.D5.PossibleMoves = [self.C5, self.D6, self.E5]
+        self.D6.PossibleMoves = [self.B6, self.D5, self.D7, self.F6]
+        self.D7.PossibleMoves = [self.A7, self.D6, self.G7]
 
-        E3.PossibleMoves = [D3, F2, E4]
-        E4.PossibleMoves = [E3, F4, E5]
-        E5.PossibleMoves = [D5, E4, F6]
+        self.E3.PossibleMoves = [self.D3, self.F2, self.E4]
+        self.E4.PossibleMoves = [self.E3, self.F4, self.E5]
+        self.E5.PossibleMoves = [self.D5, self.E4, self.F6]
 
-        F2.PossibleMoves = [D2, E3, F4, G1]
-        F4.PossibleMoves = [E4, F2, F6, G4]
-        F6.PossibleMoves = [D6, E5, F4, G7]
+        self.F2.PossibleMoves = [self.D2, self.E3, self.F4, self.G1]
+        self.F4.PossibleMoves = [self.E4, self.F2, self.F6, self.G4]
+        self.F6.PossibleMoves = [self.D6, self.E5, self.F4, self.G7]
 
-        G1.PossibleMoves = [D1, F2, G4]
-        G4.PossibleMoves = [F4, G1, G7]
-        G7.PossibleMoves = [D7, F6, G4]
+        self.G1.PossibleMoves = [self.D1, self.F2, self.G4]
+        self.G4.PossibleMoves = [self.F4, self.G1, self.G7]
+        self.G7.PossibleMoves = [self.D7, self.F6, self.G4]
 
-        return [A1, A4, A7, B2, B4, B6, C3, C4, C5, D1, D2, D3, D5, D6, D7, E3, E4, E5, F2, F4, F6, G1, G4, G7]
+        return [self.A1, self.A4, self.A7, self.B2, self.B4, self.B6, self.C3, self.C4, self.C5, self.D1, self.D2, self.D3, self.D5, self.D6, self.D7, self.E3, self.E4, self.E5, self.F2, self.F4, self.F6, self.G1, self.G4, self.G7]
 
-    def allBoardMills():
+    def allBoardMills(self):
 
-        AA17 = [A1, A4, A7]
-        BB26 = [B2, B4, B6]
-        CC35 = [C3, C4, C5]
-        DD13 = [D1, D2, D3]
-        DD57 = [D5, D6, D7]
-        EE35 = [E3, E4, E5]
-        FF26 = [F2, F4, F6]
-        GG17 = [G1, G4, G7]
+        AA17 = [self.A1, self.A4, self.A7]
+        BB26 = [self.B2, self.B4, self.B6]
+        CC35 = [self.C3, self.C4, self.C5]
+        DD13 = [self.D1, self.D2, self.D3]
+        DD57 = [self.D5, self.D6, self.D7]
+        EE35 = [self.E3, self.E4, self.E5]
+        FF26 = [self.F2, self.F4, self.F6]
+        GG17 = [self.G1, self.G4, self.G7]
 
-        AG11 = [A1, D1, G1]
-        BF22 = [B2, D2, F2]
-        CE33 = [C3, D3, E3]
-        AC44 = [A4, B4, C4]
-        EG44 = [E4, F4, G4]
-        CE55 = [C5, D5, E5]
-        BF66 = [B6, D6, F6]
-        AG77 = [A7, D7, G7]
+        AG11 = [self.A1, self.D1, self.G1]
+        BF22 = [self.B2, self.D2, self.F2]
+        CE33 = [self.C3, self.D3, self.E3]
+        AC44 = [self.A4, self.B4, self.C4]
+        EG44 = [self.E4, self.F4, self.G4]
+        CE55 = [self.C5, self.D5, self.E5]
+        BF66 = [self.B6, self.D6, self.F6]
+        AG77 = [self.A7, self.D7, self.G7]
 
-        AC13 = [A1, B2, C3]
-        CA57 = [C5, B6, A7]
-        GE13 = [G1, F2, E3]
-        EG57 = [E5, F6, G7]
+        AC13 = [self.A1, self.B2, self.C3]
+        CA57 = [self.C5, self.B6, self.A7]
+        GE13 = [self.G1, self.F2, self.E3]
+        EG57 = [self.E5, self.F6, self.G7]
 
-        allBoardMills = [ AA17, BB26, CC35, DD13, DD57, EE35, FF26, GG17, AG11, BF22, CE33, AC44, EG44, CE55, BF66, AG77, AC13, CA57, GE13, EG57 ]
+        allBoardMills = [AA17, BB26, CC35, DD13, DD57, EE35, FF26, GG17, AG11, BF22, CE33, AC44, EG44, CE55, BF66, AG77, AC13, CA57, GE13, EG57 ]
 
         return allBoardMills
 
