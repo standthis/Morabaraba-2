@@ -23,7 +23,12 @@ def getPos(what:str):
         return getPos(what)
     return (row,col);  
     
-def getPlayerMove(game:Game,player:Player):
+def getPlayerMove():
+    if(game.turn==0):       #player 1's turn
+      player= game.Player1
+    else:                   #player 2's turn
+      player= game.Player2
+    
     if(player.PlayerState==ThePlayerState.MOVING):
         
         toRow,toCol=getPos("{0}'s turn\nWhere do you want to place the cow?".format(player.Name));
@@ -85,11 +90,3 @@ def runGame()-> None:
     return
                                
     
-
-def main(): 
-    runGame()
-  #  board.printOut(startBoard.startBoard());                    
-    return 
-
-                
-main()
