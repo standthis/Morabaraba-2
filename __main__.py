@@ -20,12 +20,7 @@ def getPos(what:str):
         return getPos(what)
     return (row,col);  
     
-def getPlayerMove(game:Game):    
-    if(game.turn==0):       #player 1's turn
-      player= game.Player1
-    else:                   #player 2's turn
-      player= game.Player2
-     
+def getPlayerMove(game:Game,player:Player):        
     if(player.PlayerState==ThePlayerState.MOVING):
         
         toRow,toCol=getPos("{0}'s turn\nWhere do you want to place the cow?".format(player.Name));
@@ -55,30 +50,30 @@ def getPlayerMove(game:Game):
             printf("You have now cow at ({0},{1}}".format(fromRow,fromCol))
            #return getPlayerMove(game,player)
                
-            
-      
-  
-  
- #   print("User wants to move to ({0},{1})".format(row, col))
-    #return newGame,newPlayer if we can't pass by reference
-    #return;  
-
-
-
+                          
 def runGame(game:Game)-> None:
-
+    if(game.turn==0):       #player 1's turn
+        player=game.Player1
+        enemyPlayer=game.Player2
+    else:                   #player 2's turn
+        player=game.Player2
+        enemyPlayer=game.Player1
+        
     board.printOut(game.Board)
-    fromPos, toPos= getPlayerMove(game)
+    fromPos, toPos= getPlayerMove(game,player)
     #game.updatePlayer((fromRow,fromCol),(toRow,toCol));  //update the board and player positions based on the players state
                                   #game will know who's turn it is and will return the appropriate player
+    board.printOut(game.Board)
     #if(game.checkFromMills()):  //check if a board mills was formed by the current play
-       #killRow,killCol=killCow(game)
+       #killRow,killCol=killCow(game,enemyPlayers)
        #game.killCow((row,col));
-     #if(game.checkEnd()): //game should check if enemy player is not moving and that enemy player has more than 2 cows (IF FLYING)
+     #if(game.moveExi: //game should check if enemy player cant move and that enemy player has more than 2 cows (IF FLYING)
      # game.end() //prints out the appropriate ending message  
+     # return
      #else    
      #    game.changePlayerTurn() 
-     #    runGame(game)
+     #    return runGame(game)
+     
   
     
 
