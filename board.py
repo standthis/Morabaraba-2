@@ -1,5 +1,9 @@
-def printOut (board):  
-
+import data
+def printOut (board:data.Game): 
+    boardToPrint=[]
+    for element in board:
+        boardToPrint.append(element.Symbol)
+    
     s = '''
                                     1   2   3       4      5   6   7
      
@@ -28,5 +32,5 @@ def printOut (board):
                                 G  ({})-------------({})------------({})
     '''
 
-    print(s.format(*board))
+    print(s.format(*boardToPrint))
 
