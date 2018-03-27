@@ -1,3 +1,11 @@
+from enum import Enum 
+
+class ThePlayerState(Enum):
+    MOVING = 0
+    PLACING = 1 
+    FLYING = 2
+
+
 class Player:
     def __init__(self, name, symbol, numberOfCows, playerState, positions):
         self.Name = name 
@@ -110,11 +118,21 @@ class Board:
 
         return allBoardMills
 
+
+#    def getPlayerMove(avaiableBoard, player): 
+
+class Game: 
+    def __init__(self, player1, player2, board, turn):
+        self.Player1 = player1
+        self.Player2 = player2
+        self.Board = board
+        self.Turn = turn 
+
+
     def availableBoard(board):
         result = []
         for i in range(len(board)):
-            if board[i].Symbol = ' ':
+            if board[i].Symbol == ' ':
                 result.append(board[i])
-        return result 
-        
+        return result
 
