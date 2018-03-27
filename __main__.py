@@ -49,7 +49,28 @@ def getPlayerMove(game:Game,player:Player):
          else:
             printf("You have now cow at ({0},{1}}".format(fromRow,fromCol))
            #return getPlayerMove(game,player)
-               
+
+#def isInMill(pos,playerMills):
+    
+
+#def canKillCowInMill(enemyPlayer,playerMills): #check if every pos in enemyPlayer's position is in playerMills
+    
+def killCow(game:Game,enemyPlayer:Player):
+  
+   playerMills=game.getPlayerMills(enemyPlayer); 
+   row,col=getPos("What cow do you want to kill?")
+   if(game.isValidKillPlace(row,col)): #check to see if(row,col) is in enemy's positons
+       if(isInMill((row,col),playerMills)):
+           if(canKillCowInMill(enemyPlayer,playerMills)):
+                  return (row,col)
+           else:
+                 print("Can't kill cow in mill unless all cows are in mills\n") 
+                 killCow(game)
+       else:
+           return (row,col)
+   else:
+        print("No valid cow was in pos ({0},{1})\n".format(row,col))
+        killCow(game) 
                           
 def runGame(game:Game)-> None:
     if(game.turn==0):       #player 1's turn
