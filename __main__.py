@@ -31,6 +31,7 @@ def runGame(game)-> None:
 
 def main(): 
     
+    
   #  player_1= Player("Player 1",'x',12,ThePlayerState.MOVING,[])
    # player_2= Player("Player 2",'o',12,ThePlayerState.MOVING,[])
   #  startBoard= Board()
