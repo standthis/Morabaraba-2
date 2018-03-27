@@ -88,8 +88,8 @@ def runGame(game:Game)-> None:
     #if(game.checkFromMills()):  //check if a board mills was formed by the current play
        #killRow,killCol=killCow(game,enemyPlayers)
        #game.killCow((row,col));
-     #if(game.moveExi: //game should check if enemy player cant move and that enemy player has more than 2 cows (IF FLYING)
-     # game.end() //prints out the appropriate ending message  
+     #if(game.Ended()): //game should check if enemy player cant move and that enemy player has more than 2 cows (IF FLYING)
+     # game.printEndMessage() //prints out the appropriate ending message  
      # return
      #else    
      #    game.changePlayerTurn() 
