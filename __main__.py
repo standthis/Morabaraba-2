@@ -57,7 +57,14 @@ def getPlayerMove(game:Game,player:Player):
     return;  
 
 def runGame(game)-> None:
-
+    board.printOut(game.Board)
+    if(game.turn==0):       #player 1's turn
+        getPlayerMove(game,game.Player1)
+    else:                   #player 2's turn
+        getPlayerMove(game,game.Player2)
+    
+    
+    #game.
     return
     
 
@@ -66,7 +73,7 @@ def main():
     player_2= Player("Player 2",'o',12,ThePlayerState.MOVING,[])
     startBoard= Board()
     Morabaraba= Game(player_1,player_2,startBoard,0);
-   # runGame(Morabaraba)
+    runGame(Morabaraba)
     board.printOut(startBoard.startBoard());                    
     return 
                              
