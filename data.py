@@ -53,7 +53,7 @@ class Board:
     G4 = Cow(('G', 4), ' ', [])
     G7 = Cow(('G', 7), ' ', [])
 
-    def startBoard():
+    def startBoard(self):
 
         A1.PossibleMoves = [A4, B2, D1]
         A4.PossibleMoves = [A1, A7, B4]
