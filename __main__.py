@@ -3,10 +3,7 @@ import board
 
 from data import *
 
-player_1= Player("Player 1",'x',12,ThePlayerState.MOVING,[])
-player_2= Player("Player 2",'o',12,ThePlayerState.MOVING,[])
-startBoard= Board()
-game= Game(player_1,player_2,startBoard,0);  
+
 
 def getPos(what:str):
     print(what)
@@ -23,12 +20,12 @@ def getPos(what:str):
         return getPos(what)
     return (row,col);  
     
-def getPlayerMove():
+def getPlayerMove(game:Game):    
     if(game.turn==0):       #player 1's turn
       player= game.Player1
     else:                   #player 2's turn
       player= game.Player2
-    
+     
     if(player.PlayerState==ThePlayerState.MOVING):
         
         toRow,toCol=getPos("{0}'s turn\nWhere do you want to place the cow?".format(player.Name));
@@ -66,27 +63,35 @@ def getPlayerMove():
     #return newGame,newPlayer if we can't pass by reference
     #return;  
 
-def killCow():
-    global game
-    #check whos turn
-    return
 
-def runGame()-> None:
-    global game
+
+def runGame(game:Game)-> None:
+
     board.printOut(game.Board)
-    if(game.turn==0):       #player 1's turn
-        getPlayerMove(game,game.Player1)
-        #game.updatePlayer(game.Player1,(fromRow,fromCol),(toRow,toCol));  //update the board and player positions
-        #if(game.checkFromMills(game,game.Player1)):
-            killCow();
-    else:                   #player 2's turn
-        getPlayerMove(game,game.Player2)
-        #game.updatePlayer(game.Player2,(fromRow,fromCol),(toRow,toCol));  //update the board and player positions
-        #if(game.checkFromMills(game,game.Player1)):
-            killCow();
+    fromPos, toPos= getPlayerMove(game)
+    #game.updatePlayer((fromRow,fromCol),(toRow,toCol));  //update the board and player positions based on the players state
+                                  #game will know who's turn it is and will return the appropriate player
+    #if(game.checkFromMills()):  //check if a board mills was formed by the current play
+       #killRow,killCol=killCow(game)
+       #game.killCow((row,col));
+     #if(game.checkEnd()): //game should check if enemy player is not moving and that enemy player has more than 2 cows (IF FLYING)
+     # game.end() //prints out the appropriate ending message  
+     #else    
+     #    game.changePlayerTurn() 
+     #    runGame(game)
+  
     
-    
-    #game.
-    return
+
                                
     
+
+def main():
+player_1= Player("Player 1",'x',12,ThePlayerState.MOVING,[])
+player_2= Player("Player 2",'o',12,ThePlayerState.MOVING,[])
+startBoard= Board()
+game= Game(player_1,player_2,startBoard,0);  
+runGame(game,game.Player1,game.Player2);                  
+    return 
+
+                
+main()
