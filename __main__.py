@@ -102,11 +102,11 @@ def runGame(game:Game)-> None:
     
 
 def main():
-player_1= Player("Player 1",'x',12,ThePlayerState.MOVING,[])
-player_2= Player("Player 2",'o',12,ThePlayerState.MOVING,[])
-startBoard= Board()
-game= Game(player_1,player_2,startBoard,0);  
-runGame(game,game.Player1,game.Player2);                  
+    player_1= Player("Player 1",'x',12,ThePlayerState.MOVING,[])
+    player_2= Player("Player 2",'o',12,ThePlayerState.MOVING,[])
+    startBoard= Board()
+    game= Game(player_1,player_2,startBoard,0);  
+    runGame(game,game.Player1,game.Player2);                  
     return 
 
                 
