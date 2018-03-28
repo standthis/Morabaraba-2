@@ -13,6 +13,13 @@ class Player:
         self.PlayerState = playerState 
         self.Cows = cows 
 
+    def addCow(cow):
+        cow.Symbol = player.Symbol
+        self.Cows.append(cow)
+
+    def decrementCows(self):
+        self.NumberOfCows -= 1
+
 class Cow: 
     def __init__(self, pos, symbol, possibleMoves):
         self.Pos = pos 
@@ -146,14 +153,6 @@ class Game:
                 result.append(self.Board[i])
         return result
 
-
-    def addCow(player, cow):
-        cow.Symbol = player.Symbol
-        player.Cows.append(cow)
-
-    def decrementCows(player):
-        player.NumberOfCows -= 1
-
     def findCow(pos, cows):
         for cow in cows:
             if cow.Pos == pos:
@@ -191,4 +190,5 @@ class Game:
                 return True
         return False
 
-#        intersection = [list(filter(lambda x: x in list1, sublist)) for sublist in list2]
+
+
