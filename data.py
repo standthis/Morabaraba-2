@@ -13,8 +13,8 @@ class Player:
         self.PlayerState = playerState 
         self.Cows = cows 
 
-    def addCow(cow):
-        cow.Symbol = player.Symbol
+    def addCow(self, cow):
+        cow.Symbol = self.Symbol
         self.Cows.append(cow)
 
     def decrementCows(self):
