@@ -187,6 +187,8 @@ class Game:
         cows = player.Cows
         cows = cows.append(cow)
         for mill in allBoardMills:
-
+            if exist(cow.pos, mill) & len(set(mill) & set(cows)) == 3:
                 return True
         return False
+
+#        intersection = [list(filter(lambda x: x in list1, sublist)) for sublist in list2]
