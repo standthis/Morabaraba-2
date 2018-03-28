@@ -127,13 +127,15 @@ class Game:
         self.Board = board
         self.Turn = turn 
         self.Alternator = Game.alternate()
-        self.CurrentPlayer = self.Player1
+        self.CurrentPlayer = self.Player2
 
     def nextTurn(self):
         self.Turn = self.Alternator.__next__()
         if self.Turn == 1:
+            self.Player2 = self.CurrentPlayer
             self.CurrentPlayer = self.Player1
         else:
+            self.Player1 = self.CurrentPlayer
             self.CurrentPlayer = self.Player2
             
     def availableBoard(self):
