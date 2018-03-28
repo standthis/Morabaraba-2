@@ -25,13 +25,12 @@ def getPlayerMove(player, availableBoard, allBoardMills):
     if player.PlayerState == ThePlayerState.PLACING:
         pos = getPos()
         if Game.exist(pos, availableBoard):
-            Game.addCow(player, Game.findCow(pos, availableBoard), allBoardMills)
-            return 
+            player.addCow(Game.findCow(pos, availableBoard))
         else:
             print("cow : ", cow.Pos, "Pos : ", (row, col))
             print("You failed. Try again ")
             getPlayerMove(player, availableBoard, allBoardMills)
-        if checkIfmill(player, findCow(pos, availableBoard), allBoardMills):
+        if Game.checkIfmill(player, Game.findCow(pos, availableBoard), allBoardMills):
                 return None
 
     else:
@@ -45,10 +44,16 @@ def getPlayerMove(player, availableBoard, allBoardMills):
             toPos = getPos()
             if Game.exist(toPos, availableBoard):
                 player.Cows = Game.filterOut(player.Cows, fromPos)
-                Game.addCow(player, Game.findCow(toPos, availableBoard))
+                player.addCow(Game.findCow(toPos, availableBoard))
             else:
                 print("You can not move your cow there")
                 getPlayerMove(player,availableBoard, allBoardMills)
+
+
+def killCow():
+
+    return None 
+
 
 main()
 
