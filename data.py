@@ -178,10 +178,7 @@ class Game:
         result = []
         for i in range(len(self.Board)):
             if exist(self.Board[i].Pos, cows):
-                for j in range(len(cows)):
-                    if cows[j].Pos == self.Board[i].Pos:
-                        result.append(cows[j])
+                result.append(findCow(self.Board[i].Pos, cows))
             else:
                 result.append(self.Board[i])
-            
         return result 
