@@ -6,12 +6,12 @@ class ThePlayerState(Enum):
 
 
 class Player:
-    def __init__(self, name, symbol, numberOfCows, playerState, positions):
+    def __init__(self, name, symbol, numberOfCows, playerState, cows):
         self.Name = name 
         self.Symbol = symbol 
         self.NumberOfCows = numberOfCows
         self.PlayerState = playerState 
-        self.Positions = positions 
+        self.Cows = cows 
 
 class Cow: 
     def __init__(self, pos, symbol, possibleMoves):
@@ -135,19 +135,19 @@ class Game:
                 result.append(self.Board[i])
         return result
 
-    def exists(cow, cows):
-        for c in cows:
-            if c.Pos == cow.Pos:
+    def exists(pos, cows):
+        for cow in cows:
+            if pos == cow.Pos:
                 return True 
 
     def getCurrentBoard(self):
-        positions = self.Player1.Positions + self.Player2.Positions  
+        cows = self.Player1.Cows + self.Player2.Cows  
         result = []
         for i in range(len(self.Board)):
-            if Game.exists(self.Board[i], positions):
-                for j in range(len(positions)):
-                    if positions[j].Pos == self.Board[i].Pos:
-                        result.append(positions[j])
+            if Game.exists(self.Board[i].Pos, cows):
+                for j in range(len(cows)):
+                    if cows[j].Pos == self.Board[i].Pos:
+                        result.append(cows[j])
             else:
                 result.append(self.Board[i])
             
@@ -155,13 +155,14 @@ class Game:
 
     def addCow(player, cow):
         cow.Symbol = player.Symbol
-        player.Positions.append(cow)
+        player.Cows.append(cow)
 
     def removeCow(player, cow):
-        player.Positions.Remove(cow)
+        player.Cows.Remove(cow)
 
     def decrementCows(player):
         player.NumberOfCows -= 1
+
 
         
     
