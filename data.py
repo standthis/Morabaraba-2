@@ -184,7 +184,7 @@ class Game:
         return result 
 
     def isMill(mill, cows):
-        return len(set(mill) & set(player.Cows)) == 3
+        return len(set(mill) & set(cows)) == 3
     
     def checkIfMill(player, cow, allBoardMills):
         cows = player.Cows
