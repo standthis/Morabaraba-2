@@ -178,4 +178,8 @@ class Game:
     def filterOut(player, pos):
         player.Cows = [cow for cow in player.Cows if cow.Pos != pos]
 
+    def alternate():
+        while True:
+            yield 1
+            yield 2
 
