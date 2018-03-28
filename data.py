@@ -1,4 +1,5 @@
 from enum import Enum 
+
 class ThePlayerState(Enum):
     MOVING = 0
     PLACING = 1 
@@ -181,14 +182,23 @@ class Game:
             else:
                 result.append(self.Board[i])
         return result 
+
+    def isMill(mill, cows):
+        return len(set(mill) & set(player.Cows)) == 3
     
     def checkIfMill(player, cow, allBoardMills):
         cows = player.Cows
         cows = cows.append(cow)
         for mill in allBoardMills:
-            if exist(cow.pos, mill) & len(set(mill) & set(cows)) == 3:
+            if exist(cow.pos, mill) and isMill(mill, cows):
                 return True
         return False
 
+    def getPlayerMills(player, allBoardMills):
+        result = []
+        for mill in allBoardMills:
+            if isMill(mill, player.Cows):
+                result.append(mill)
+        return result
 
 
