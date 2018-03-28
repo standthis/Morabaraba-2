@@ -1,5 +1,4 @@
 from enum import Enum 
-
 class ThePlayerState(Enum):
     MOVING = 0
     PLACING = 1 
@@ -9,7 +8,7 @@ class ThePlayerState(Enum):
 class Player:
     def __init__(self, name, symbol, numberOfCows, playerState, positions):
         self.Name = name 
-        self.Symbol =  symbol 
+        self.Symbol = symbol 
         self.NumberOfCows = numberOfCows
         self.PlayerState = playerState 
         self.Positions = positions 
@@ -129,10 +128,40 @@ class Game:
         self.Turn = turn 
 
 
-    def availableBoard(board):
+    def availableBoard(self):
         result = []
-        for i in range(len(board)):
-            if board[i].Symbol == ' ':
-                result.append(board[i])
+        for i in range(len(self.Board)):
+            if self.Board[i].Symbol == ' ':
+                result.append(self.Board[i])
         return result
 
+    def exists(cow, cows):
+        for c in cows:
+            if c.Pos == cow.Pos:
+                return True 
+
+    def getCurrentBoard(self):
+        positions = self.Player1.Positions + self.Player2.Positions  
+        result = []
+        for i in range(len(self.Board)):
+            if Game.exists(self.Board[i], positions):
+                for j in range(len(positions)):
+                    if positions[j].Pos == self.Board[i].Pos:
+                        result.append(positions[j])
+            else:
+                result.append(self.Board[i])
+            
+        return result 
+
+    def addCow(player, cow):
+        cow.Symbol = player.Symbol
+        player.Positions.append(cow)
+
+    def removeCow(player, cow):
+        player.Positions.Remove(cow)
+
+    def decrementCows(player):
+        player.NumberOfCows -= 1
+
+        
+    
