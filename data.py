@@ -165,8 +165,8 @@ class Game:
                 return True
         return False 
 
-    def filterOut(player, pos):
-        player.Cows = [cow for cow in player.Cows if cow.Pos != pos]
+    def filterOut(Cows, pos):
+        return [cow for cow in Cows if cow.Pos != pos]
 
     def alternate():
         while True:
@@ -182,3 +182,11 @@ class Game:
             else:
                 result.append(self.Board[i])
         return result 
+    
+    def checkIfMill(player, cow, allBoardMills):
+        cows = player.Cows
+        cows = cows.append(cow)
+        for mill in allBoardMills:
+
+                return True
+        return False
