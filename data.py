@@ -126,8 +126,16 @@ class Game:
         self.Player2 = player2
         self.Board = board
         self.Turn = turn 
+        self.Alternator = Game.alternate()
+        self.CurrentPlayer = self.Player1
 
-
+    def nextTurn(self):
+        self.Turn = self.Alternator.__next__()
+        if self.Turn == 1:
+            self.CurrentPlayer = self.Player1
+        else:
+            self.CurrentPlayer = self.Player2
+            
     def availableBoard(self):
         result = []
         for i in range(len(self.Board)):
@@ -157,17 +165,17 @@ class Game:
         cow.Symbol = player.Symbol
         player.Cows.append(cow)
 
-    def removeCow(player, pos):
-        for cow in player.Cows:
-            if cow.Pos == pos:
-                player.Cows.Remove(cow)
-
     def decrementCows(player):
         player.NumberOfCows -= 1
 
-#    def makeCow(player, pos):
-#        for cow in player.Cows:
-#            if cow.Pos == pos:
-#                return cow
+    def findCow(pos, cows):
+        for cow in cows:
+            if cow.Pos == pos:
+                return cow
+
+#    def isValidMove(player, ) 
+
+    def filterOut(player, pos):
+        player.Cows = [cow for cow in player.Cows if cow.Pos != pos]
 
 
