@@ -163,7 +163,7 @@ class Game:
         for cow in cows:
             if cow.Pos == pos: 
                 return True
-
+        return False 
 
     def filterOut(player, pos):
         player.Cows = [cow for cow in player.Cows if cow.Pos != pos]
@@ -177,8 +177,8 @@ class Game:
         cows = self.Player1.Cows + self.Player2.Cows  
         result = []
         for i in range(len(self.Board)):
-            if exist(self.Board[i].Pos, cows):
-                result.append(findCow(self.Board[i].Pos, cows))
+            if Game.exist(self.Board[i].Pos, cows):
+                result.append(Game.findCow(self.Board[i].Pos, cows))
             else:
                 result.append(self.Board[i])
         return result 
