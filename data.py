@@ -137,7 +137,8 @@ class Game:
         else:
             self.Player1 = self.CurrentPlayer
             self.CurrentPlayer = self.Player2
-            
+        self.Board = self.getCurrentBoard()
+
     def availableBoard(self):
         result = []
         for i in range(len(self.Board)):
@@ -145,23 +146,6 @@ class Game:
                 result.append(self.Board[i])
         return result
 
-    def exists(pos, cows):
-        for cow in cows:
-            if pos == cow.Pos:
-                return True 
-
-    def getCurrentBoard(self):
-        cows = self.Player1.Cows + self.Player2.Cows  
-        result = []
-        for i in range(len(self.Board)):
-            if Game.exists(self.Board[i].Pos, cows):
-                for j in range(len(cows)):
-                    if cows[j].Pos == self.Board[i].Pos:
-                        result.append(cows[j])
-            else:
-                result.append(self.Board[i])
-            
-        return result 
 
     def addCow(player, cow):
         cow.Symbol = player.Symbol
@@ -175,7 +159,11 @@ class Game:
             if cow.Pos == pos:
                 return cow
 
-#    def isValidMove(player, ) 
+    def exist(pos, cows):
+        for cow in cows:
+            if cow.Pos == pos: 
+                return True
+
 
     def filterOut(player, pos):
         player.Cows = [cow for cow in player.Cows if cow.Pos != pos]
@@ -185,3 +173,15 @@ class Game:
             yield 1
             yield 2
 
+    def getCurrentBoard(self):
+        cows = self.Player1.Cows + self.Player2.Cows  
+        result = []
+        for i in range(len(self.Board)):
+            if exist(self.Board[i].Pos, cows):
+                for j in range(len(cows)):
+                    if cows[j].Pos == self.Board[i].Pos:
+                        result.append(cows[j])
+            else:
+                result.append(self.Board[i])
+            
+        return result 
