@@ -25,6 +25,10 @@ class Player:
     def removeCow(self, cow):
         self.Cows = Game.filterOut(self.Cows, cow.Pos)
 
+    def changePlayerState(self, state):
+        self.PlayerState = state
+
+
 class Cow: 
     def __init__(self, pos, symbol, possibleMoves):
         self.Pos = pos 
@@ -216,5 +220,14 @@ class Game:
             if Game.isMill(mill, player.Cows):
                 result.append(mill)
         return result
+
+    def checkStateChange(self):
+        if (self.CurrentPlayer.PlayerState == ThePlayerState.PLACING and
+                self.CurrentPlayer.UnplayedCows == 0):
+            self.CurrentPlayer.changePlayerState(ThePlayerState.MOVING)
+        elif (self.CurrentPlayer.PlayerState == ThePlayerState.MOVING and 
+                len(self.CurrentPlayer.Cows) == 3):
+            self.CurrentPlayer.changePlayerState(ThePlayerState.FLYING)
+
 
 
