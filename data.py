@@ -129,13 +129,14 @@ class Board:
 #    def getPlayerMove(avaiableBoard, player): 
 
 class Game: 
-    def __init__(self, player1, player2, board, turn):
+    def __init__(self, player1, player2, board, turn, allBoardMills):
         self.Player1 = player1
         self.Player2 = player2
         self.Board = board
         self.Turn = turn 
         self.Alternator = Game.alternate()
         self.CurrentPlayer = self.Player2
+        self.AllBoardMills = allBoardMills
 
     def nextTurn(self):
         self.Turn = self.Alternator.__next__()

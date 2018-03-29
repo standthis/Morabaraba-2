@@ -7,12 +7,9 @@ def main():
     board = Board()
     startboard = board.startBoard()
     allBoardMills = board.allBoardMills()
-    game = Game(player1, player2, startboard, 1)
+    game = Game(player1, player2, startboard, 1, allBoardMills)
     while True:
-        game.nextTurn()
-        print(game.CurrentPlayer.Name)
-        printOut(game.Board)
-        getPlayerMove(game.CurrentPlayer, game.availableBoard(), allBoardMills)
+        runGame(game)
 
 
 def getPos():
@@ -30,7 +27,7 @@ def getPlayerMove(player, availableBoard, allBoardMills):
             print("You failed. Try again ")
             getPlayerMove(player, availableBoard, allBoardMills)
         if Game.checkIfMill(player, Game.findCow(pos, availableBoard), allBoardMills):
-            print("ISMILL!!!!")
+            print("MILL")
 
     else:
         print("Where do you want to move the cow from?: ")
@@ -52,6 +49,11 @@ def getPlayerMove(player, availableBoard, allBoardMills):
 def killCow():
     return None 
 
+def runGame(game):
+    game.nextTurn()
+    print(game.CurrentPlayer.Name)
+    printOut(game.Board)
+    getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
 
 main()
 
