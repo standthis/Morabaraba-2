@@ -2,8 +2,8 @@ from data import *
 from board import printOut  
 
 def main():
-    player1 = Player("player1", 'X', 12, ThePlayerState.PLACING, [])
-    player2 = Player("player2", 'O', 12, ThePlayerState.PLACING, [])
+    player1 = Player("player1", 'X', 6, ThePlayerState.PLACING, [])
+    player2 = Player("player2", 'O', 6, ThePlayerState.PLACING, [])
     board = Board()
     startboard = board.startBoard()
     allBoardMills = board.allBoardMills()
@@ -14,8 +14,14 @@ def main():
 
 def getPos():
     row = input("What row: ")
-    row = row.upper()
-    col = int(input("What col: "))
+    row = row[0].upper()
+
+    col = input("What col: ")
+    try:
+        col = int(col)
+    except:
+        print("INCORRECT INPUT!") 
+        getPos()
     return (row, col) 
 
 def getPlayerMove(player, availableBoard, allBoardMills):
@@ -42,6 +48,7 @@ def getPlayerMove(player, availableBoard, allBoardMills):
             if Game.exist(toPos, availableBoard):
                 player.Cows = Game.filterOut(player.Cows, fromPos)
                 player.addCow(Game.findCow(toPos, availableBoard))
+                return fromPos, toPos
             else:
                 print("You can not move your cow there")
                 getPlayerMove(player,availableBoard, allBoardMills)
@@ -55,11 +62,15 @@ def getPlayerMove(player, availableBoard, allBoardMills):
         else : 
             print("Where do you want to move the cow to?: ")
             toPos = getPos()
-            if Game.exist(toPos, list((set(availableBoard) & 
-                set(findCow(toPos, availableBoard).PossibleMoves)))):
+            #if Game.exist(toPos, list((set(availableBoard) & 
+            #    set(Game.findCow(toPos, availableBoard).PossibleMoves)))):
+            if Game.exist(toPos, availableBoard):
+                if Game.exist(toPos, list((set(availableBoard) & 
+                    set(Game.findCow(toPos, availableBoard).PossibleMoves)))):
 
-                player.Cows = Game.filterOut(player.Cows, fromPos)
-                player.addCow(Game.findCow(toPos, availableBoard))
+                    player.Cows = Game.filterOut(player.Cows, fromPos)
+                    player.addCow(Game.findCow(toPos, availableBoard))
+                    return fromPos, toPos
             else:
                 print("You can not move your cow there")
                 getPlayerMove(player,availableBoard, allBoardMills)
@@ -84,6 +95,12 @@ def runGame(game):
     print(game.CurrentPlayer.Name)
     printOut(game.Board)
     fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
+
+    # Testing for fromPos, toPos as they are causing an error 
+    print("FROMPOS is NONE -> ", fromPos is None, "TOPOS is NONE  -> ", toPos is None)
+    if fromPos is not None and toPos is not None:
+        print("FROMPOS -> ", fromPos, "TOPOS -> ", toPos)
+
     if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
         killCow(game)
 
