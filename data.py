@@ -184,20 +184,29 @@ class Game:
         return result 
 
     def isMill(mill, cows):
-        return len(set(mill) & set(cows)) == 3
+        # rework mill.Symbol & cow.Symbol
+        noSym = []
+        millPos = []
+        cowsPos = []
+        for cow in cows: 
+            cowsPos.append(cow.Pos)
+        for m in mill:
+            millPos.append(m.Pos)
+        return len(set(millPos) & set(cowsPos)) == 3
+
     
     def checkIfMill(player, cow, allBoardMills):
         cows = player.Cows
-        cows = cows.append(cow)
+        cows.append(cow)
         for mill in allBoardMills:
-            if exist(cow.pos, mill) and isMill(mill, cows):
+            if Game.exist(cow.Pos, mill) and Game.isMill(mill, cows):
                 return True
         return False
 
     def getPlayerMills(player, allBoardMills):
         result = []
         for mill in allBoardMills:
-            if isMill(mill, player.Cows):
+            if Game.isMill(mill, player.Cows):
                 result.append(mill)
         return result
 

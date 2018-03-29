@@ -16,9 +16,9 @@ def main():
 
 
 def getPos():
-    row = input("What row ")
+    row = input("What row: ")
     row = row.upper()
-    col = int(input("What col "))
+    col = int(input("What col: "))
     return (row, col) 
 
 def getPlayerMove(player, availableBoard, allBoardMills):
@@ -27,16 +27,15 @@ def getPlayerMove(player, availableBoard, allBoardMills):
         if Game.exist(pos, availableBoard):
             player.addCow(Game.findCow(pos, availableBoard))
         else:
-            print("cow : ", cow.Pos, "Pos : ", (row, col))
             print("You failed. Try again ")
             getPlayerMove(player, availableBoard, allBoardMills)
-        if Game.checkIfmill(player, Game.findCow(pos, availableBoard), allBoardMills):
-                return None
+        if Game.checkIfMill(player, Game.findCow(pos, availableBoard), allBoardMills):
+            print("ISMILL!!!!")
 
     else:
         print("Where do you want to move the cow from?: ")
         fromPos = getPos()
-        if not exist(fromPos, player.Cows):
+        if not Game.exist(fromPos, player.Cows):
             print("You have no cow there. Try again") 
             getPlayerMove(player, availableBoard, allBoardMills)
         else : 
@@ -51,7 +50,6 @@ def getPlayerMove(player, availableBoard, allBoardMills):
 
 
 def killCow():
-
     return None 
 
 
