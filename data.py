@@ -183,18 +183,13 @@ class Game:
                 result.append(self.Board[i])
         return result 
 
-    def isMill(mill, cows):
-        # rework mill.Symbol & cow.Symbol
-        noSym = []
-        millPos = []
-        cowsPos = []
-        for cow in cows: 
-            cowsPos.append(cow.Pos)
-        for m in mill:
-            millPos.append(m.Pos)
-        return len(set(millPos) & set(cowsPos)) == 3
+    def posList(cows):
+        return [cow.Pos for cow in cows]
 
-    
+    def isMill(mill, cows):
+        return len(set(Game.posList(mill)) & set(Game.posList(cows))) == 3
+
+
     def checkIfMill(player, cow, allBoardMills):
         cows = player.Cows
         cows.append(cow)
