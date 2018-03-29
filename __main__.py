@@ -23,11 +23,10 @@ def getPlayerMove(player, availableBoard, allBoardMills):
         pos = getPos()
         if Game.exist(pos, availableBoard):
             player.addCow(Game.findCow(pos, availableBoard))
+            return ('Z', 200) , pos
         else:
             print("You failed. Try again ")
             getPlayerMove(player, availableBoard, allBoardMills)
-        if Game.checkIfMill(player, Game.findCow(pos, availableBoard), allBoardMills):
-            print("MILL")
 
     else:
         print("Where do you want to move the cow from?: ")
@@ -53,7 +52,9 @@ def runGame(game):
     game.nextTurn()
     print(game.CurrentPlayer.Name)
     printOut(game.Board)
-    getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
+    fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
+    if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
+        print("Mill")
 
 main()
 

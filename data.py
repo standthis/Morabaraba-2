@@ -125,9 +125,6 @@ class Board:
 
         return allBoardMills
 
-
-#    def getPlayerMove(avaiableBoard, player): 
-
 class Game: 
     def __init__(self, player1, player2, board, turn, allBoardMills):
         self.Player1 = player1
@@ -137,14 +134,17 @@ class Game:
         self.Alternator = Game.alternate()
         self.CurrentPlayer = self.Player2
         self.AllBoardMills = allBoardMills
+        self.OtherPlayer = self.Player1
 
     def nextTurn(self):
         self.Turn = self.Alternator.__next__()
         if self.Turn == 1:
             self.Player2 = self.CurrentPlayer
+            self.OtherPlayer = self.CurrentPlayer
             self.CurrentPlayer = self.Player1
         else:
             self.Player1 = self.CurrentPlayer
+            self.OtherPlayer = self.CurrentPlayer
             self.CurrentPlayer = self.Player2
         self.Board = self.getCurrentBoard()
 
