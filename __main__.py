@@ -20,6 +20,7 @@ def getPos():
 
 def getPlayerMove(player, availableBoard, allBoardMills):
     if player.PlayerState == ThePlayerState.PLACING:
+        print("YOU ARE PLACING") 
         pos = getPos()
         if Game.exist(pos, availableBoard):
             player.addCow(Game.findCow(pos, availableBoard))
@@ -28,7 +29,8 @@ def getPlayerMove(player, availableBoard, allBoardMills):
             print("You failed. Try again ")
             getPlayerMove(player, availableBoard, allBoardMills)
 
-    else:
+    elif player.PlayerState == ThePlayerState.FLYING:
+        print("YOU ARE FLYING") 
         print("Where do you want to move the cow from?: ")
         fromPos = getPos()
         if not Game.exist(fromPos, player.Cows):
@@ -43,6 +45,25 @@ def getPlayerMove(player, availableBoard, allBoardMills):
             else:
                 print("You can not move your cow there")
                 getPlayerMove(player,availableBoard, allBoardMills)
+    else: 
+        print("YOU ARE MOVING") 
+        print("Where do you want to move the cow from?: ")
+        fromPos = getPos()
+        if not Game.exist(fromPos, player.Cows):
+            print("You have no cow there. Try again") 
+            getPlayerMove(player, availableBoard, allBoardMills)
+        else : 
+            print("Where do you want to move the cow to?: ")
+            toPos = getPos()
+            if Game.exist(toPos, list((set(availableBoard) & 
+                set(findCow(toPos, availableBoard).PossibleMoves)))):
+
+                player.Cows = Game.filterOut(player.Cows, fromPos)
+                player.addCow(Game.findCow(toPos, availableBoard))
+            else:
+                print("You can not move your cow there")
+                getPlayerMove(player,availableBoard, allBoardMills)
+
 
 
 def killCow(game):
