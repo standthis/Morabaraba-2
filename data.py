@@ -10,16 +10,17 @@ class Player:
     def __init__(self, name, symbol, numberOfCows, playerState, cows):
         self.Name = name 
         self.Symbol = symbol 
-        self.NumberOfCows = numberOfCows
+        self.UnplayedCows = numberOfCows
         self.PlayerState = playerState 
         self.Cows = cows 
 
     def addCow(self, cow):
         cow.Symbol = self.Symbol
         self.Cows.append(cow)
+        self.decrementCows()
 
     def decrementCows(self):
-        self.NumberOfCows -= 1
+        self.UnplayedCows -= 1
 
     def removeCow(self, cow):
         self.Cows = Game.filterOut(self.Cows, cow.Pos)
