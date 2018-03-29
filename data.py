@@ -21,6 +21,9 @@ class Player:
     def decrementCows(self):
         self.NumberOfCows -= 1
 
+    def removeCow(self, cow):
+        self.Cows = Game.filterOut(self.Cows, cow.Pos)
+
 class Cow: 
     def __init__(self, pos, symbol, possibleMoves):
         self.Pos = pos 
@@ -140,12 +143,18 @@ class Game:
         self.Turn = self.Alternator.__next__()
         if self.Turn == 1:
             self.Player2 = self.CurrentPlayer
-            self.OtherPlayer = self.CurrentPlayer
-            self.CurrentPlayer = self.Player1
+            #self.OtherPlayer = self.CurrentPlayer
+            #self.CurrentPlayer = self.OtherPlayer
+            temp = self.CurrentPlayer
+            self.CurrentPlayer = self.OtherPlayer
+            self.OtherPlayer = temp
         else:
             self.Player1 = self.CurrentPlayer
-            self.OtherPlayer = self.CurrentPlayer
-            self.CurrentPlayer = self.Player2
+            #self.OtherPlayer = self.CurrentPlayer
+            #self.CurrentPlayer = self.OtherPlayer
+            temp = self.CurrentPlayer
+            self.CurrentPlayer = self.OtherPlayer
+            self.OtherPlayer = temp
         self.Board = self.getCurrentBoard()
 
     def availableBoard(self):
@@ -175,12 +184,13 @@ class Game:
             yield 2
 
     def getCurrentBoard(self):
-        cows = self.Player1.Cows + self.Player2.Cows  
+        cows = self.CurrentPlayer.Cows + self.OtherPlayer.Cows  
         result = []
         for i in range(len(self.Board)):
             if Game.exist(self.Board[i].Pos, cows):
                 result.append(Game.findCow(self.Board[i].Pos, cows))
             else:
+                self.Board[i].Symbol = ' '
                 result.append(self.Board[i])
         return result 
 

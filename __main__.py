@@ -45,8 +45,18 @@ def getPlayerMove(player, availableBoard, allBoardMills):
                 getPlayerMove(player,availableBoard, allBoardMills)
 
 
-def killCow():
-    return None 
+def killCow(game):
+    print("Which cow do you want to kill")
+    pos = getPos()
+
+    cowsInMill = sum(Game.getPlayerMills(game.OtherPlayer, game.AllBoardMills), [])
+    if Game.exist(pos, list(set(game.OtherPlayer.Cows) - set(cowsInMill))):
+        game.OtherPlayer.removeCow(Game.findCow(pos, game.OtherPlayer.Cows))
+    else:
+        print("invalid kill")
+        killCow(game)
+
+
 
 def runGame(game):
     game.nextTurn()
@@ -54,7 +64,7 @@ def runGame(game):
     printOut(game.Board)
     fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
     if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
-        print("Mill")
+        killCow(game)
 
 main()
 
