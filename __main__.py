@@ -86,11 +86,12 @@ def killCow(game):
 def runGame(game):
     game.nextTurn()
     game.checkStateChange()
+    print("number of cows is", len(game.CurrentPlayer.Cows))
+    for cow in game.CurrentPlayer.Cows:
+        print(cow.Pos)
     print(game.CurrentPlayer.Name)
     printOut(game.Board)
     fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
-
-    print(Game.findCow(toPos, game.CurrentPlayer.Cows).PossibleMoves)
 
     if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
         killCow(game)

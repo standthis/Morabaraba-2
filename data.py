@@ -1,4 +1,5 @@
 from enum import Enum 
+import copy 
 
 class ThePlayerState(Enum):
     MOVING = 0
@@ -148,18 +149,12 @@ class Game:
         self.Turn = self.Alternator.__next__()
         if self.Turn == 1:
             self.Player2 = self.CurrentPlayer
-            #self.OtherPlayer = self.CurrentPlayer
-            #self.CurrentPlayer = self.OtherPlayer
-            temp = self.CurrentPlayer
-            self.CurrentPlayer = self.OtherPlayer
-            self.OtherPlayer = temp
+            self.CurrentPlayer = self.Player1
+            self.OtherPlayer = self.Player2
         else:
             self.Player1 = self.CurrentPlayer
-            #self.OtherPlayer = self.CurrentPlayer
-            #self.CurrentPlayer = self.OtherPlayer
-            temp = self.CurrentPlayer
-            self.CurrentPlayer = self.OtherPlayer
-            self.OtherPlayer = temp
+            self.CurrentPlayer = self.Player2
+            self.OtherPlayer = self.Player1
         self.Board = self.getCurrentBoard()
 
     def availableBoard(self):
@@ -207,7 +202,7 @@ class Game:
 
 
     def checkIfMill(player, cow, allBoardMills):
-        cows = player.Cows
+        cows = copy.deepcopy(player.Cows)
         cows.append(cow)
         for mill in allBoardMills:
             if Game.exist(cow.Pos, mill) and Game.isMill(mill, cows):
