@@ -158,11 +158,7 @@ class Game:
         self.Board = self.getCurrentBoard()
 
     def availableBoard(self):
-        result = []
-        for i in range(len(self.Board)):
-            if self.Board[i].Symbol == ' ':
-                result.append(self.Board[i])
-        return result
+        return [board for board in self.Board if board.Symbol == ' '] 
 
     def findCow(pos, cows):
         for cow in cows:
@@ -198,6 +194,7 @@ class Game:
         return [cow.Pos for cow in cows]
 
     def isMill(mill, cows):
+        #return len([cow for cow in Game.posList(mill) if cow not in Game.posList(cows)])
         return len(set(Game.posList(mill)) & set(Game.posList(cows))) == 3
 
 
