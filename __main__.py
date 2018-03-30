@@ -10,7 +10,6 @@ def main():
     game = Game(player1, player2, startboard, 1, allBoardMills)
     while not game.endGame(): 
         runGame(game)
-        game.endGame()
 
 
 def getPos():
