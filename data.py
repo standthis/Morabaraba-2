@@ -216,13 +216,12 @@ class Game:
                 result.append(mill)
         return result
 
-    def checkStateChange(self):
-        if (self.CurrentPlayer.PlayerState == ThePlayerState.PLACING and
-                self.CurrentPlayer.UnplayedCows == 0):
-            self.CurrentPlayer.changePlayerState(ThePlayerState.MOVING)
-        elif (self.CurrentPlayer.PlayerState == ThePlayerState.MOVING and 
-                len(self.CurrentPlayer.Cows) == 3):
-            self.CurrentPlayer.changePlayerState(ThePlayerState.FLYING)
-
+    def checkStateChange(player):
+        if (player.PlayerState == ThePlayerState.PLACING and
+                player.UnplayedCows == 0):
+            player.changePlayerState(ThePlayerState.MOVING)
+        elif (player.PlayerState == ThePlayerState.MOVING and 
+                len(player.Cows) == 3):
+            player.changePlayerState(ThePlayerState.FLYING)
 
 

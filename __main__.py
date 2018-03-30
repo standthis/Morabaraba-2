@@ -81,20 +81,24 @@ def killCow(game):
         print("invalid kill")
         killCow(game)
 
-
+def checkStateChange(player):
+    if (player.PlayerState == ThePlayerState.PLACING and
+            player.UnplayedCows == 0):
+        player.changePlayerState(ThePlayerState.MOVING)
+    elif (player.PlayerState == ThePlayerState.MOVING and 
+            len(player.Cows) == 3):
+        player.changePlayerState(ThePlayerState.FLYING)
 
 def runGame(game):
     game.nextTurn()
-    game.checkStateChange()
-    print("number of cows is", len(game.CurrentPlayer.Cows))
-    for cow in game.CurrentPlayer.Cows:
-        print(cow.Pos)
-    print(game.CurrentPlayer.Name)
+    checkStateChange(game.CurrentPlayer)
+    print("Your turn: ", game.CurrentPlayer.Name)
     printOut(game.Board)
     fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
 
     if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
         killCow(game)
+    checkStateChange(game.OtherPlayer)
 
 main()
 
