@@ -229,8 +229,18 @@ class Game:
                 return False   
             return True  
 
-    def endGame(self):
-        if not self.possibleMove():
+    def endGameMsg(self):
             print("Game is over") 
             print(self.CurrentPlayer.Name, ", You are the winner")
+
+    def endGame(self):
+        if len(self.availableBoard()) == 24:
+            return False 
+        elif not self.possibleMove():
+            self.endGameMsg()
             return True
+        elif len(self.OtherPlayer.Cows) == 2 and self.OtherPlayer.PlayerState == ThePlayerState.FLYING:
+            self.endGameMsg()
+            return True 
+        else:
+            return False 

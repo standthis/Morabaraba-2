@@ -8,10 +8,9 @@ def main():
     startboard = board.startBoard()
     allBoardMills = board.allBoardMills()
     game = Game(player1, player2, startboard, 1, allBoardMills)
-    while True: 
+    while not game.endGame(): 
         runGame(game)
-        if game.endGame():
-            break
+        game.endGame()
 
 
 def getPos():
