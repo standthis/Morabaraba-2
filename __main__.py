@@ -35,15 +35,12 @@ def getPlayerMove(player, availableBoard, allBoardMills):
             else:
                 print("You failed. Try again ")
 
-                #getPlayerMove(player, availableBoard, allBoardMills)
-
         elif player.PlayerState == ThePlayerState.FLYING:
             print("YOU ARE FLYING") 
             print("Where do you want to move the cow from?: ")
             fromPos = getPos()
             if not Game.exist(fromPos, player.Cows):
                 print("You have no cow there. Try again") 
-                #getPlayerMove(player, availableBoard, allBoardMills)
             else : 
                 print("Where do you want to move the cow to?: ")
                 toPos = getPos()
@@ -53,19 +50,15 @@ def getPlayerMove(player, availableBoard, allBoardMills):
                     return fromPos, toPos
                 else:
                     print("You can not move your cow there")
-                    #getPlayerMove(player,availableBoard, allBoardMills)
         else: 
             print("YOU ARE MOVING") 
             print("Where do you want to move the cow from?: ")
             fromPos = getPos()
             if not Game.exist(fromPos, player.Cows):
                 print("You have no cow there. Try again") 
-                #getPlayerMove(player, availableBoard, allBoardMills)
             else : 
                 print("Where do you want to move the cow to?: ")
                 toPos = getPos()
-                #if Game.exist(toPos, list((set(availableBoard) & 
-                #    set(Game.findCow(toPos, availableBoard).PossibleMoves)))):
                 if Game.exist(toPos, availableBoard):
                     if Game.exist(toPos, list(set(availableBoard) & 
                         set(Game.findCow(fromPos, player.Cows).PossibleMoves))):
@@ -75,7 +68,6 @@ def getPlayerMove(player, availableBoard, allBoardMills):
                         return fromPos, toPos
                 else:
                     print("You can not move your cow there")
-                    #getPlayerMove(player,availableBoard, allBoardMills)
 
 
 
@@ -97,20 +89,11 @@ def runGame(game):
     print(game.CurrentPlayer.Name)
     printOut(game.Board)
     fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
-    print("HERE!!!")
+
     print(Game.findCow(toPos, game.CurrentPlayer.Cows).PossibleMoves)
-    # Testing for fromPos, toPos as they are causing an error 
-    print("FROMPOS is NONE -> ", fromPos is None, "TOPOS is NONE  -> ", toPos is None)
-    if fromPos is not None and toPos is not None:
-        print("FROMPOS -> ", fromPos, "TOPOS -> ", toPos)
 
     if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
         killCow(game)
-   # availPos = list((set(game.availableBoard()) & set(Game.findCow(toPos, game.availableBoard()).PossibleMoves)))
-   # print("SETS DEBUG")
-   # print("--------------------")
-   # for a in availPos:
-   #     print(a.Pos)
 
 main()
 
