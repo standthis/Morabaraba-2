@@ -2,14 +2,16 @@ from data import *
 from board import printOut  
 
 def main():
-    player1 = Player("player1", 'X', 4, ThePlayerState.PLACING, [])
+    player1 = Player("player1", 'X', 12, ThePlayerState.PLACING, [])
     player2 = Player("player2", 'O', 4, ThePlayerState.PLACING, [])
     board = Board()
     startboard = board.startBoard()
     allBoardMills = board.allBoardMills()
     game = Game(player1, player2, startboard, 1, allBoardMills)
-    while True:
+    while True: 
         runGame(game)
+        if game.endGame():
+            break
 
 
 def getPos():
@@ -99,6 +101,5 @@ def runGame(game):
     if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
         killCow(game)
     checkStateChange(game.OtherPlayer)
-
 main()
 

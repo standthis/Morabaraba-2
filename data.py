@@ -216,16 +216,21 @@ class Game:
                 result.append(mill)
         return result
 
-    def noMove(self):
+    def possibleMove(self):
         player = self.OtherPlayer
         availableBoard = self.availableBoard()
         if player.PlayerState == ThePlayerState.MOVING:
             for cow in player.Cows:
-                if len(set(cow.PossibleMoves) & set(availableBoard)) > 0:
+                if len(set(Game.posList(cow.PossibleMoves)) & set(Game.posList(availableBoard))) > 0:
                     return True 
             return False 
         else:
             if len(availableBoard) == 0:
-                return False
-            return True 
+                return False   
+            return True  
 
+    def endGame(self):
+        if not self.possibleMove():
+            print("Game is over") 
+            print(self.CurrentPlayer.Name, ", You are the winner")
+            return True
