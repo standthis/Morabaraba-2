@@ -98,6 +98,7 @@ def runGame(game):
     fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
 
     if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
+        printOut(game)
         killCow(game)
     checkStateChange(game.OtherPlayer)
 main()

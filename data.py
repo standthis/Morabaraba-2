@@ -209,11 +209,8 @@ class Game:
         return False
 
     def getPlayerMills(player, allBoardMills):
-        result = []
-        for mill in allBoardMills:
-            if Game.isMill(mill, player.Cows):
-                result.append(mill)
-        return result
+        return [mill for mill in allBoardMills if Game.isMill(mill, player.Cows)] 
+        
 
     def possibleMove(self):
         player = self.OtherPlayer
