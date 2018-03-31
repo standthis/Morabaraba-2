@@ -34,3 +34,17 @@ def printOut (board:data.Game):
 
     print(s.format(*boardToPrint))
 
+
+cowSay ='''\033[32m
+                                                 ____________
+                                                < Morabaraba-2 >
+                                                 ------------
+                                                       \   ,__,
+                                                        \  (oo)____
+                                                           (__)    )\\
+                                                              ||--|| *
+                                                               
+
+                                               Press any key to coninue 
+   \033[00m '''
+

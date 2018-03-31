@@ -1,5 +1,5 @@
 from data import * 
-from board import printOut  
+from board import printOut, cowSay  
 
 def main():
     player1 = Player("player1", 'X', 12, ThePlayerState.PLACING, [])
@@ -8,6 +8,8 @@ def main():
     startboard = board.startBoard()
     allBoardMills = board.allBoardMills()
     game = Game(player1, player2, startboard, 1, allBoardMills)
+    print(cowSay)
+    input()
     while not game.endGame(): 
         runGame(game)
 
