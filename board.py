@@ -51,7 +51,7 @@ cowSay = colors.GREEN + '''
                                                               ||--|| *
                                                                
 
-                                               Press any key to coninue 
+                                               Press any key to play 
     ''' + colors.ENDC
 
 
