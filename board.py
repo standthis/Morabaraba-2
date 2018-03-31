@@ -1,5 +1,11 @@
 import data
-def printOut (board:data.Game): 
+
+class colors():
+    GREEN = '\033[32m' 
+    ENDC = '\033[00m'
+    RED = '\033[31m'
+
+def printOut (board): 
     boardToPrint=[]
     for element in board:
         boardToPrint.append(element.Symbol)
@@ -35,7 +41,7 @@ def printOut (board:data.Game):
     print(s.format(*boardToPrint))
 
 
-cowSay ='''\033[32m
+cowSay = colors.GREEN + '''
                                                  ____________
                                                 < Morabaraba-2 >
                                                  ------------
@@ -46,5 +52,6 @@ cowSay ='''\033[32m
                                                                
 
                                                Press any key to coninue 
-   \033[00m '''
+    ''' + colors.ENDC
+
 

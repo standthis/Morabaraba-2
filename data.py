@@ -1,5 +1,6 @@
 from enum import Enum 
 import copy 
+from board import colors 
 
 class ThePlayerState(Enum):
     MOVING = 0
@@ -8,9 +9,9 @@ class ThePlayerState(Enum):
 
 
 class Player:
-    def __init__(self, name, symbol, numberOfCows, playerState, cows):
+    def __init__(self, name, symbol, numberOfCows, playerState, cows, color):
         self.Name = name 
-        self.Symbol = symbol 
+        self.Symbol = color + symbol + colors.ENDC 
         self.UnplayedCows = numberOfCows
         self.PlayerState = playerState 
         self.Cows = cows 
