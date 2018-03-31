@@ -195,9 +195,11 @@ class Game:
     def posList(cows):
         return [cow.Pos for cow in cows]
 
+    def intersection(l1, l2):
+        return set(Game.posList(l1)) & set(Game.posList(l2))
+
     def isMill(mill, cows):
-        #return len([cow for cow in Game.posList(mill) if cow not in Game.posList(cows)])
-        return len(set(Game.posList(mill)) & set(Game.posList(cows))) == 3
+        return len(Game.intersection(mill, cows)) == 3
 
 
     def checkIfMill(player, cow, allBoardMills):
@@ -217,7 +219,7 @@ class Game:
         availableBoard = self.availableBoard()
         if player.PlayerState == ThePlayerState.MOVING:
             for cow in player.Cows:
-                if len(set(Game.posList(cow.PossibleMoves)) & set(Game.posList(availableBoard))) > 0:
+                if len(Game.intersection(cow.PossibleMoves, availableBoard)) > 0:
                     return True 
             return False 
         else:
