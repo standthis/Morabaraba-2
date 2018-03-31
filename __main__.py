@@ -16,14 +16,18 @@ def main():
 
 def getPos():
     row = input("What row: ")
-    row = row[0].upper()
+    try:
+        row = row[0].upper()
+    except: 
+        print("INCORRECT INPUT!") 
+        return getPos()
 
     col = input("What col: ")
     try:
         col = int(col)
     except:
         print("INCORRECT INPUT!") 
-        getPos()
+        return getPos()
     return (row, col) 
 
 def getPlayerMove(player, availableBoard, allBoardMills):
