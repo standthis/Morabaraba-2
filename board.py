@@ -8,7 +8,7 @@ class colors():
 
 def printOut (game): 
     os.system('clear')
-    print('\n' * 5, ' ' * 47, game.CurrentPlayer.Color + game.CurrentPlayer.Name + colors.ENDC + '\n')
+    print('\n' * 5, ' ' * 47, game.CurrentPlayer.Name + '\n')
     s = '''
                                     1   2   3       4      5   6   7
      
