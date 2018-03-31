@@ -1,4 +1,5 @@
 import data
+import os 
 
 class colors():
     GREEN = '\033[32m' 
@@ -6,10 +7,8 @@ class colors():
     RED = '\033[31m'
 
 def printOut (board): 
-    boardToPrint=[]
-    for element in board:
-        boardToPrint.append(element.Symbol)
-    
+    os.system('clear')
+
     s = '''
                                     1   2   3       4      5   6   7
      
@@ -38,7 +37,7 @@ def printOut (board):
                                 G  ({})-------------({})------------({})
     '''
 
-    print(s.format(*boardToPrint))
+    print(s.format(*[cow.Symbol for cow in board]))
 
 
 cowSay = colors.GREEN + '''
