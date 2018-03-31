@@ -3,7 +3,7 @@ from board import printOut, cowSay, colors
 
 def main():
     player1 = Player("player1", 'X', 12, ThePlayerState.PLACING, [], colors.GREEN)
-    player2 = Player("player2", 'O', 4, ThePlayerState.PLACING, [], colors.RED)
+    player2 = Player("player2", 'O', 12, ThePlayerState.PLACING, [], colors.RED)
     board = Board()
     startboard = board.startBoard()
     allBoardMills = board.allBoardMills()
