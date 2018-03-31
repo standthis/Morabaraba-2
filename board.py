@@ -6,9 +6,9 @@ class colors():
     ENDC = '\033[00m'
     RED = '\033[31m'
 
-def printOut (board): 
+def printOut (game): 
     os.system('clear')
-
+    print(' ' * 48, game.CurrentPlayer.Color + game.CurrentPlayer.Name + colors.ENDC)
     s = '''
                                     1   2   3       4      5   6   7
      
@@ -37,7 +37,7 @@ def printOut (board):
                                 G  ({})-------------({})------------({})
     '''
 
-    print(s.format(*[cow.Symbol for cow in board]))
+    print(s.format(*[cow.Symbol for cow in game.Board]))
 
 
 cowSay = colors.GREEN + '''

@@ -14,7 +14,8 @@ class Player:
         self.Symbol = color + symbol + colors.ENDC 
         self.UnplayedCows = numberOfCows
         self.PlayerState = playerState 
-        self.Cows = cows 
+        self.Cows = cows
+        self.Color = color 
 
     def addCow(self, cow):
         cow.Symbol = self.Symbol

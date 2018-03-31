@@ -94,8 +94,7 @@ def checkStateChange(player):
 def runGame(game):
     game.nextTurn()
     checkStateChange(game.CurrentPlayer)
-    print("Your turn: ", game.CurrentPlayer.Name)
-    printOut(game.Board)
+    printOut(game)
     fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
 
     if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
