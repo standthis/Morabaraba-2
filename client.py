@@ -18,7 +18,7 @@ def get_player_id():
 def main():
     global PLAYER_ID
     global SOCKET
-    ip_address="127.0.0.1"
+    ip_address=input("Please enter the ip address for the server:\n").strip()
     connect_to_server(ip_address)
     print("Connected!\n")
     
