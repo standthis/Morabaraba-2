@@ -2,6 +2,8 @@ from enum import Enum
 from __main__ import *
 
 SERVER_PORT=5151
+BUFFER_SIZE= 1024
+
 class InstructionFromClient( Enum):
     PLAYER_MOVE = 0
     KILL_COW=1
