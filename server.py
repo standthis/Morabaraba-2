@@ -12,7 +12,7 @@ PLAYER_SOCK_ID=[]
 
 def create_server_socket():
     global SERVER_SOCKET
-    HOST= "127.0.0.1"
+    HOST=socket.gethostbyname(socket.getfqdn())
     print("Host: {0}\n".format(HOST))
     PORT=socket.htons(networkData.SERVER_PORT)
     ADDR=(HOST,PORT)
@@ -34,6 +34,8 @@ def main():
         client_sock.send(str(NUM_PLAYERS).encode())
         NUM_PLAYERS+=1
 
-    client_sock.close()
+    PLAYER_SOCK_ID[0].close()
+    PLAYER_SOCK_ID[1].close()
+    SERVER_SOCKET.close()
 
 main()
