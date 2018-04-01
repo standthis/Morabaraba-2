@@ -8,11 +8,12 @@ SOCKET = 0
 def connect_to_server(ip_address):
     global SOCKET
     SOCKET= socket.socket()
-    ADDR=(ip_address,networkData.SERVER_PORT)
+    PORT= socket.htons(networkData.SERVER_PORT)
+    ADDR=(ip_address,PORT)
     SOCKET.connect(ADDR);
 
 def get_player_id():
-    return s.recv(networkData.BUFFER_SIZE).decode()
+    return int(SOCKET.recv(networkData.BUFFER_SIZE).decode())
 
 def main():
     global PLAYER_ID
