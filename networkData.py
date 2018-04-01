@@ -1,7 +1,7 @@
 from enum import Enum
 from __main__ import *
 
-
+SERVER_PORT=5151
 class InstructionFromClient( Enum):
     PLAYER_MOVE = 0
     KILL_COW=1
