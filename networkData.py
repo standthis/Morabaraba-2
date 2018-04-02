@@ -7,6 +7,7 @@ BUFFER_SIZE= 1024
 class InstructionFromClient(Enum):
     PLAYER_MOVE = 0
     KILL_COW=1
+    NO_KILL_COW=2
 
 
 class InstructionFromServer(Enum): 
@@ -40,6 +41,8 @@ class Network_data:
             return 0
         elif(CLIENT_INSTRUCTION==InstructionFromClient.KILL_COW):           
             return 1
+        elif(CLIENT_INSTRUCTION==InstructionFromClient.NO_KILL_COW):   
+            return 2 
 
 
 
