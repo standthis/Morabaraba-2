@@ -16,7 +16,7 @@ class Player:
         self.PlayerState = playerState 
         self.Cows = cows
         self.Color = color 
-        self.ID=ID
+        self.ID = ID
 
     def addCow(self, cow):
         cow.Symbol = self.Symbol
