@@ -51,7 +51,7 @@ def getPlayerMove(player, availableBoard, allBoardMills):
                 print("Where do you want to move the cow to?: ")
                 toPos = getPos()
                 if Game.exist(toPos, availableBoard):
-                    player.removeCow(Game.findCow(fromPos, availableBoard))
+                    player.removeCow(Game.findCow(fromPos, player.Cows))
                     player.addCow(Game.findCow(toPos, availableBoard))
                     return fromPos, toPos
                 else:
@@ -68,7 +68,7 @@ def getPlayerMove(player, availableBoard, allBoardMills):
                 #if Game.exist(toPos, availableBoard):
                 if Game.exist(toPos, list(set(availableBoard) & 
                     set(Game.findCow(fromPos, player.Cows).PossibleMoves))):
-                    player.removeCow(Game.findCow(fromPos, availableBoard))
+                    player.removeCow(Game.findCow(fromPos,player.Cows))
                     player.addCow(Game.findCow(toPos, availableBoard))
                     return fromPos, toPos
                 else:
