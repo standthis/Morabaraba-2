@@ -27,8 +27,8 @@ def runGameServer(game):
 
 
 def startGame():
-    player1 = Player("player1",'X',12,ThePlayerState.PLACING,[],colors.GREEN)
-    player2 = Player("player2",'O',12,ThePlayerState.PLACING,[],colors.RED)
+    player1 = Player("player1",'X',12,ThePlayerState.PLACING,[],colors.GREEN,0)
+    player2 = Player("player2",'O',12,ThePlayerState.PLACING,[],colors.RED,1)
     board= Board()
     startboard=board.startBoard()
     allBoardMills= board.allBoardMills()
@@ -57,7 +57,7 @@ def main():
     
     #tell the players that the game can start
 
-    NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerIntructionValue(InstructionFromServer.GAME_START)
+    NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.GAME_START)
 
     PLAYER_SOCK_ID[0].send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())
     PLAYER_SOCK_ID[1].send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())
