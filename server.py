@@ -38,7 +38,7 @@ def startGame():
 
 
 def main():
-    global NETWORK_DATA,SERVER_SOCKET,NUM_PLAYERS
+    global NETWORK_DATA,SERVER_SOCKET,NUM_PLAYERS,PLAYER_SOCK_ID
 
     create_server_socket()
     SERVER_SOCKET.listen(2)
@@ -47,9 +47,8 @@ def main():
     while (NUM_PLAYERS < 2) :
         print("Waiting for clients...\n")
         client_sock,client_addr= SERVER_SOCKET.accept() 
-        print("Got a connection from ",client_addr)
-        PLAYER_SOCK_ID.append(client_sock);   
-        #client_sock.recv()
+        print("Got a connection from\n ",client_addr)
+        PLAYER_SOCK_ID.append(client_sock)
         player_id= NUM_PLAYERS
         client_sock.send(str(NUM_PLAYERS).encode())
         NUM_PLAYERS+=1
@@ -59,8 +58,8 @@ def main():
     #tell the players that the game can start
 
     NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerIntructionValue(InstructionFromServer.GAME_START)
-    
 
+    PLAYER_SOCK_ID[0].send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())
     PLAYER_SOCK_ID[1].send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())
 
     startGame()
