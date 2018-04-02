@@ -37,7 +37,7 @@ def getPlayerMove(player, availableBoard, allBoardMills):
             pos = getPos()
             if Game.exist(pos, availableBoard):
                 player.addCow(Game.findCow(pos, availableBoard))
-                return ('Z', 200) , pos
+                return ('Z', 2) , pos
             else:
                 print("You failed. Try again ")
 

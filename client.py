@@ -17,14 +17,80 @@ def connect_to_server(ip_address):
 def get_player_id():
    return int(SOCKET.recv(1).decode())  #player id is only 1 byte cause its a string version of a single digit number
 
+def write_to_server():
+    fromLet, fromNum = NETWORK_DATA.fromPos
+    toLet,toNum = NETWORK_DATA.toPos
+
+    SOCKET.send(str(NETWORK_DATA.CLIENT_INSTRUCTION).encode())
+    SOCKET.send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())
+    SOCKET.send(str(NETWORK_DATA.latest_player_id).encode())
+    SOCKET.send(str(NETWORK_DATA.current_player_id).encode())
+    SOCKET.send(str(fromLet).encode())
+    SOCKET.send(str(fromNum).encode())
+    SOCKET.send(str(toLet).encode())
+    SOCKET.send(str(toNum).encode())
+  
+
+def read_from_server():
+    fromLet, fromNum = NETWORK_DATA.fromPos
+    toLet,toPos = NETWORK_DATA.toPos
+    
+    NETWORK_DATA.CLIENT_INSTRUCTION= int(SOCKET.recv(1).decode())
+    NETWORK_DATA.SERVER_INSTRUCTION= int(SOCKET.recv(1).decode())
+    NETWORK_DATA.latest_player_id= int(SOCKET.recv(1).decode())
+    NETWORK_DATA.current_player_id= int(SOCKET.recv(1).decode())
+    NETWORK_DATA.fromPos= (SOCKET.recv(1).decode())[0] , int(SOCKET.recv(1).decode())
+    NETWORK_DATA.toPos= (SOCKET.recv(1).decode())[0] , int(SOCKET.recv(1).decode())
+
+def send_instruction_to_server():
+    write_to_server()
+    read_from_server()
+
+def process_instruction_from_server(game:Game):
+    fromPos= NETWORK_DATA.fromPos;
+    toPos=NETWORK_DATA.toPos;
+
+    if (NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.MOVE_PIECE)):
+        
+        if(game.CurrentPlayer.PlayerState==ThePlayerState.PLACING):
+            print("{0} moved to {1} ".format(game.CurrentPlayer.Name,toPos))
+            game.CurrentPlayer.addCow(Game.findCow(toPos, game.availableBoard()))
+                
+    elif (NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)):
+        print("")
+    else :      
+        print("Invalid instruction !\n",NETWORK_DATA.SERVER_INSTRUCTION);
+    
 def runServerGame(game:Game):
     game.nextTurn()
     checkStateChange(game.CurrentPlayer)
     printOut(game)
     if(game.CurrentPlayer.ID==PLAYER_ID):
         print("Your turn")
+        fromPos, toPos = getPlayerMove(game.CurrentPlayer, game.availableBoard(), game.AllBoardMills)
+        
+        NETWORK_DATA.fromPos=fromPos
+        NETWORK_DATA.toPos=toPos
+        NETWORK_DATA.CLIENT_INSTRUCTION= NETWORK_DATA.getClientInstructionValue(InstructionFromClient.PLAYER_MOVE)
+        
+        send_instruction_to_server()
+
+        # if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
+        # printOut(game)
+        # killCow(game)
+        checkStateChange(game.OtherPlayer)
+       
     else:
         print("Currently {0}'s turn\n".format(game.CurrentPlayer.Name))
+        #wait to get response from server
+        read_from_server() 
+
+    process_instruction_from_server(game)
+
+
+
+
+
 
 
 def startGame():
@@ -33,13 +99,15 @@ def startGame():
     board=Board()
     startboard=board.startBoard()
     allBoardMills= board.allBoardMills()
-    game= Game(player1,player2,startboard,1,allBoardMills)
-    runServerGame(game)
+    game = Game(player1,player2,startboard,1,allBoardMills)
+    while not game.endGame(): 
+        runServerGame(game)
+    
 
 def main():
     global PLAYER_ID,SOCKET,NETWORK_DATA
     #ip_address=input("Please enter the ip address for the server:\n").strip()
-    ip_address="192.168.1.19"
+    ip_address="192.168.1.9"
     connect_to_server(ip_address)
     print("Connected!\n")
     print("You are player {0}\n".format(PLAYER_ID+1))
