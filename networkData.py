@@ -28,7 +28,7 @@ class Network_data:
         self.toLet=''
         self.toNum=0
 
-    def getServerIntructionValue(self,SERVER_INSTRUCTION):
+    def getServerInstructionValue(self,SERVER_INSTRUCTION):
         if(SERVER_INSTRUCTION==InstructionFromServer.DO_NOTHING):
             return 0
         elif (SERVER_INSTRUCTION==InstructionFromServer.MOVE_PIECE):            
