@@ -7,7 +7,7 @@ class colors():
     RED = '\033[31m'
 
 def printOut (game): 
-    os.system('clear')
+   # os.system('cls')
     print('\n' * 5, ' ' * 47, game.CurrentPlayer.Name + '\n')
     s = '''
                                     1   2   3       4      5   6   7
