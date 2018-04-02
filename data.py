@@ -9,13 +9,14 @@ class ThePlayerState(Enum):
 
 
 class Player:
-    def __init__(self, name, symbol, numberOfCows, playerState, cows, color):
+    def __init__(self, name, symbol, numberOfCows, playerState, cows, color,ID):
         self.Name = color + name + colors.ENDC 
         self.Symbol = color + symbol + colors.ENDC 
         self.UnplayedCows = numberOfCows
         self.PlayerState = playerState 
         self.Cows = cows
         self.Color = color 
+        self.ID=ID
 
     def addCow(self, cow):
         cow.Symbol = self.Symbol
