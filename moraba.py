@@ -82,9 +82,11 @@ def killCow(game):
     cowsInMill = sum(Game.getPlayerMills(game.OtherPlayer, game.AllBoardMills), [])
     if Game.exist(pos, list(set(game.OtherPlayer.Cows) - set(cowsInMill))):
         game.OtherPlayer.removeCow(Game.findCow(pos, game.OtherPlayer.Cows))
+        return pos
     else:
         print("invalid kill")
-        killCow(game)
+        return killCow(game)
+    
 
 def checkStateChange(player):
     if (player.PlayerState == ThePlayerState.PLACING and
