@@ -124,8 +124,8 @@ def startGame():
 
 def main():
     global PLAYER_ID,SOCKET,NETWORK_DATA
-    #ip_address=input("Please enter the ip address for the server:\n").strip()
-    ip_address="192.168.1.9"
+    ip_address=input("Please enter the ip address for the server:\n").strip()
+    #ip_address="192.168.1.9"
     connect_to_server(ip_address)
     print("Connected!\n")
     print("You are player {0}\n".format(PLAYER_ID+1))
