@@ -58,6 +58,10 @@ def process_instruction_from_server(game:Game):
                 
     elif (NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)):
         print("")
+    elif (NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.REMOVE_PIECE)):
+        print("{0} just shot your cow at {1}".format(game.CurrentPlayer.Name,toPos))     
+        game.OtherPlayer.removeCow(Game.findCow(toPos, game.OtherPlayer.Cows))
+        
     else :      
         print("Invalid instruction !\n",NETWORK_DATA.SERVER_INSTRUCTION);
     
@@ -74,18 +78,32 @@ def runServerGame(game:Game):
         NETWORK_DATA.CLIENT_INSTRUCTION= NETWORK_DATA.getClientInstructionValue(InstructionFromClient.PLAYER_MOVE)
         
         send_instruction_to_server()
+        process_instruction_from_server(game)
+        NETWORK_DATA.CLIENT_INSTRUCTION= NETWORK_DATA.getClientInstructionValue(InstructionFromClient.NO_KILL_COW) 
+        if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
+            printOut(game)
+            killPos=killCow(game)
 
-        # if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
-        # printOut(game)
-        # killCow(game)
+            NETWORK_DATA.toPos=killPos #use toPos as the kill Pos
+            NETWORK_DATA.CLIENT_INSTRUCTION= NETWORK_DATA.getClientInstructionValue(InstructionFromClient.KILL_COW)
+            
+        send_instruction_to_server()
+        process_instruction_from_server(game)
+
         checkStateChange(game.OtherPlayer)
        
     else:
         print("Currently {0}'s turn\n".format(game.CurrentPlayer.Name))
         #wait to get response from server
-        read_from_server() 
-
-    process_instruction_from_server(game)
+        read_from_server() #read to check where other player placed
+        process_instruction_from_server(game)
+        toPos=NETWORK_DATA.toPos;
+        if(Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills)):
+            print("{0} has formed a mill ".format(game.CurrentPlayer.Name))
+            printOut(game)
+        read_from_server() #see if enemy player has formed a mill
+        process_instruction_from_server(game)
+   
 
 
 

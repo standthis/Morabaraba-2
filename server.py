@@ -43,33 +43,69 @@ def read_from_player(whichPlayer):
 
 def process_instruction_fromClient(game):
    # global NETWORK_DATA
+    fromPos= NETWORK_DATA.fromPos;
+    toPos= NETWORK_DATA.toPos
     if(NETWORK_DATA.CLIENT_INSTRUCTION == NETWORK_DATA.getClientInstructionValue(InstructionFromClient.PLAYER_MOVE)):
-        fromPos= NETWORK_DATA.fromPos;
-        toPos= NETWORK_DATA.toPos
         if(game.CurrentPlayer.PlayerState==ThePlayerState.PLACING):
-            print("Pos to move is ",toPos)
+            print("{0} is moving to {1}".format(game.CurrentPlayer.Name,toPos))
             game.CurrentPlayer.addCow(Game.findCow(toPos, game.availableBoard()))
+        
+        elif(game.CurrentPlayer.PlayerState==ThePlayerState.MOVING):
+            player.removeCow(Game.findCow(fromPos, availableBoard))
+            player.addCow(Game.findCow(toPos, availableBoard))
+        
+        elif(game.CurrentPlayer.PlayerState==ThePlayerState.PLACING):
+            player.removeCow(Game.findCow(fromPos, availableBoard))
+            player.addCow(Game.findCow(toPos, availableBoard))
         
         NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)
             
         write_to_player(game.CurrentPlayer.ID);
             
-        print("{0} just played\n".format(game.CurrentPlayer.Name));
+        print("{0} just played\n".format(game.CurrentPlayer.Name))
             
         NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.MOVE_PIECE)
-        write_to_player(game.OtherPlayer.ID);
+        write_to_player(game.OtherPlayer.ID)
 
-    #else:
+    elif(NETWORK_DATA.CLIENT_INSTRUCTION == NETWORK_DATA.getClientInstructionValue(InstructionFromClient.KILL_COW)):
+        game.OtherPlayer.removeCow(Game.findCow(toPos, game.OtherPlayer.Cows))
+        NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)
+
+        write_to_player(game.CurrentPlayer.ID);
+
+        print("{0} has shot cow at {1}".format(game.CurrentPlayer.Name,toPos))
+        
+        NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.REMOVE_PIECE)
+        write_to_player(game.OtherPlayer.ID)
+    elif(NETWORK_DATA.CLIENT_INSTRUCTION == NETWORK_DATA.getClientInstructionValue(InstructionFromClient.NO_KILL_COW)):
+       
+        NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)
+        write_to_player(game.CurrentPlayer.ID); 
+        write_to_player(game.OtherPlayer.ID)
+    
+
+
+
         #toDO
         
-def send_clients_game(game):
-    read_from_player(game.CurrentPlayer.ID)
+def get_clients_game(game):
+
+    read_from_player(game.CurrentPlayer.ID) #check for 
     process_instruction_fromClient(game)
+    toPos= NETWORK_DATA.toPos
+    if(Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills)):
+        print("{0} has formed a mill ".format(game.CurrentPlayer.Name))
+        printOut(game)
+
+    read_from_player(game.CurrentPlayer.ID) #check for mill formed
+    process_instruction_fromClient(game)
+    game.Board=game.getCurrentBoard();
+   
     
 def runGameServer(game):
     game.nextTurn()
     checkStateChange(game.CurrentPlayer)
-    send_clients_game(game)
+    get_clients_game(game)
     printOut(game);
 
 
