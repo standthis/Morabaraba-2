@@ -23,10 +23,8 @@ class Network_data:
         self.SERVER_INSTRUCTION=0
         self.latest_player_id=0
         self.current_player_id=0
-        self.fromLet=''
-        self.fromNum=0
-        self.toLet=''
-        self.toNum=0
+        self.fromPos=('',0)
+        self.toPos=('',0)
 
     def getServerInstructionValue(self,SERVER_INSTRUCTION):
         if(SERVER_INSTRUCTION==InstructionFromServer.DO_NOTHING):
@@ -37,7 +35,7 @@ class Network_data:
             return 2
         elif (SERVER_INSTRUCTION==InstructionFromServer.GAME_START):            
             return 3
-    def getClientIntructionValue(self,CLIENT_INSTRUCTION):
+    def getClientInstructionValue(self,CLIENT_INSTRUCTION):
         if(CLIENT_INSTRUCTION==InstructionFromClient.PLAYER_MOVE):           
             return 0
         elif(CLIENT_INSTRUCTION==InstructionFromClient.KILL_COW):           
