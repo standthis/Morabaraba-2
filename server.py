@@ -50,13 +50,11 @@ def process_instruction_fromClient(game):
             print("{0} is moving to {1}".format(game.CurrentPlayer.Name,toPos))
             game.CurrentPlayer.addCow(Game.findCow(toPos, game.availableBoard()))
         
-        elif(game.CurrentPlayer.PlayerState==ThePlayerState.MOVING):
-            player.removeCow(Game.findCow(fromPos, availableBoard))
-            player.addCow(Game.findCow(toPos, availableBoard))
+        else: #player is has to be MOVING or FLYING
+            game.CurrentPlayer.removeCow(Game.findCow(fromPos, game.CurrentPlayer.Cows))
+            game.CurrentPlayer.addCow(Game.findCow(toPos, game.availableBoard()))
         
-        elif(game.CurrentPlayer.PlayerState==ThePlayerState.PLACING):
-            player.removeCow(Game.findCow(fromPos, availableBoard))
-            player.addCow(Game.findCow(toPos, availableBoard))
+    
         
         NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)
             
@@ -133,7 +131,6 @@ def main():
         client_sock,client_addr= SERVER_SOCKET.accept() 
         print("Got a connection from\n ",client_addr)
         PLAYER_SOCK_ID.append(client_sock)
-        player_id= NUM_PLAYERS
         client_sock.send(str(NUM_PLAYERS).encode())
         NUM_PLAYERS+=1
 

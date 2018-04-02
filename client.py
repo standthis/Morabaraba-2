@@ -55,6 +55,11 @@ def process_instruction_from_server(game:Game):
         if(game.CurrentPlayer.PlayerState==ThePlayerState.PLACING):
             print("{0} moved to {1} ".format(game.CurrentPlayer.Name,toPos))
             game.CurrentPlayer.addCow(Game.findCow(toPos, game.availableBoard()))
+        else:
+            print("{0} moved from {1} to {2} ".format(game.CurrentPlayer.Name,fromPos,toPos))
+            game.CurrentPlayer.removeCow(Game.findCow(fromPos, game.CurrentPlayer.Cows))
+            game.CurrentPlayer.addCow(Game.findCow(toPos, game.availableBoard()))
+            
                 
     elif (NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)):
         print("")
