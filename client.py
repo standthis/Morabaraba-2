@@ -128,6 +128,22 @@ def startGame():
     
 
 def main():
+    valid= False
+    while not valid:
+        try:
+            local=input("Are you playing locally?[Y/n] (q to quit): ")[0].upper()
+        except: 
+            print("Please give a valid response!")
+            continue
+        if  local == 'Y' :
+            valid=True
+            return localMain()
+        elif local == 'Q':
+            return
+        elif local != 'N':
+            print("Please give a valid response!")
+        else:
+            valid=True
     global PLAYER_ID,SOCKET,NETWORK_DATA
     ip_address=input("Please enter the ip address for the server:\n").strip()
     #ip_address="192.168.1.9"
