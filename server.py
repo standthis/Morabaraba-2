@@ -1,4 +1,3 @@
-
 import socket
 from networkData import *
 from moraba import *
@@ -93,6 +92,7 @@ def get_clients_game(game):
     toPos= NETWORK_DATA.toPos
     if(Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills)):
         print("{0} has formed a mill ".format(game.CurrentPlayer.Name))
+        game.Board = game.getCurrentBoard()
         printOut(game)
 
     read_from_player(game.CurrentPlayer.ID) #check for mill formed

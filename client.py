@@ -86,6 +86,7 @@ def runServerGame(game:Game):
         process_instruction_from_server(game)
         NETWORK_DATA.CLIENT_INSTRUCTION= NETWORK_DATA.getClientInstructionValue(InstructionFromClient.NO_KILL_COW) 
         if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
+            game.Board = game.getCurrentBoard()
             printOut(game)
             killPos=killCow(game)
 
@@ -105,6 +106,7 @@ def runServerGame(game:Game):
         toPos=NETWORK_DATA.toPos;
         if(Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills)):
             print("{0} has formed a mill ".format(game.CurrentPlayer.Name))
+            game.Board = game.getCurrentBoard()
             printOut(game)
         read_from_server() #see if enemy player has formed a mill
         process_instruction_from_server(game)
