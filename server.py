@@ -44,7 +44,7 @@ def process_instruction_fromClient(game):
    # global NETWORK_DATA
     fromPos= NETWORK_DATA.fromPos;
     toPos= NETWORK_DATA.toPos
-    if(NETWORK_DATA.CLIENT_INSTRUCTION == NETWORK_DATA.getClientInstructionValue(InstructionFromClient.PLAYER_MOVE)):
+    if(NETWORK_DATA.CLIENT_INSTRUCTION == InstructionFromClient.PLAYER_MOVE):
         if(game.CurrentPlayer.PlayerState==ThePlayerState.PLACING):
             print("{0} is moving to {1}".format(game.CurrentPlayer.Name,toPos))
             game.CurrentPlayer.addCow(Game.findCow(toPos, game.availableBoard()))
@@ -55,28 +55,28 @@ def process_instruction_fromClient(game):
         
     
         
-        NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)
+        NETWORK_DATA.SERVER_INSTRUCTION= InstructionFromServer.DO_NOTHING
             
         write_to_player(game.CurrentPlayer.ID);
             
         print("{0} just played\n".format(game.CurrentPlayer.Name))
             
-        NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.MOVE_PIECE)
+        NETWORK_DATA.SERVER_INSTRUCTION= InstructionFromServer.MOVE_PIECE
         write_to_player(game.OtherPlayer.ID)
 
-    elif(NETWORK_DATA.CLIENT_INSTRUCTION == NETWORK_DATA.getClientInstructionValue(InstructionFromClient.KILL_COW)):
+    elif(NETWORK_DATA.CLIENT_INSTRUCTION == InstructionFromClient.KILL_COW):
         game.OtherPlayer.removeCow(Game.findCow(toPos, game.OtherPlayer.Cows))
-        NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)
+        NETWORK_DATA.SERVER_INSTRUCTION= InstructionFromServer.DO_NOTHING
 
         write_to_player(game.CurrentPlayer.ID);
 
         print("{0} has shot cow at {1}".format(game.CurrentPlayer.Name,toPos))
         
-        NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.REMOVE_PIECE)
+        NETWORK_DATA.SERVER_INSTRUCTION= InstructionFromServer.REMOVE_PIECE
         write_to_player(game.OtherPlayer.ID)
-    elif(NETWORK_DATA.CLIENT_INSTRUCTION == NETWORK_DATA.getClientInstructionValue(InstructionFromClient.NO_KILL_COW)):
+    elif(NETWORK_DATA.CLIENT_INSTRUCTION == InstructionFromClient.NO_KILL_COW):
        
-        NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)
+        NETWORK_DATA.SERVER_INSTRUCTION= InstructionFromServer.DO_NOTHING
         write_to_player(game.CurrentPlayer.ID); 
         write_to_player(game.OtherPlayer.ID)
     
@@ -138,7 +138,7 @@ def main():
     
     #tell the players that the game can start
 
-    NETWORK_DATA.SERVER_INSTRUCTION= NETWORK_DATA.getServerInstructionValue(InstructionFromServer.GAME_START)
+    NETWORK_DATA.SERVER_INSTRUCTION= InstructionFromServer.GAME_START
 
     PLAYER_SOCK_ID[0].send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())
     PLAYER_SOCK_ID[1].send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())

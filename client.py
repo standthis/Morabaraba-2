@@ -50,7 +50,7 @@ def process_instruction_from_server(game:Game):
     fromPos= NETWORK_DATA.fromPos;
     toPos=NETWORK_DATA.toPos;
 
-    if (NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.MOVE_PIECE)):
+    if (NETWORK_DATA.SERVER_INSTRUCTION == InstructionFromServer.MOVE_PIECE):
         
         if(game.CurrentPlayer.PlayerState==ThePlayerState.PLACING):
             print("{0} moved to {1} ".format(game.CurrentPlayer.Name,toPos))
@@ -61,9 +61,9 @@ def process_instruction_from_server(game:Game):
             game.CurrentPlayer.addCow(Game.findCow(toPos, game.availableBoard()))
             
                 
-    elif (NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.DO_NOTHING)):
+    elif (NETWORK_DATA.SERVER_INSTRUCTION == InstructionFromServer.DO_NOTHING):
         print("")
-    elif (NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.REMOVE_PIECE)):
+    elif (NETWORK_DATA.SERVER_INSTRUCTION == InstructionFromServer.REMOVE_PIECE):
         print("{0} just shot your cow at {1}".format(game.CurrentPlayer.Name,toPos))     
         game.OtherPlayer.removeCow(Game.findCow(toPos, game.OtherPlayer.Cows))
         
@@ -80,18 +80,18 @@ def runServerGame(game:Game):
         
         NETWORK_DATA.fromPos=fromPos
         NETWORK_DATA.toPos=toPos
-        NETWORK_DATA.CLIENT_INSTRUCTION= NETWORK_DATA.getClientInstructionValue(InstructionFromClient.PLAYER_MOVE)
+        NETWORK_DATA.CLIENT_INSTRUCTION= InstructionFromClient.PLAYER_MOVE
         
         send_instruction_to_server()
         process_instruction_from_server(game)
-        NETWORK_DATA.CLIENT_INSTRUCTION= NETWORK_DATA.getClientInstructionValue(InstructionFromClient.NO_KILL_COW) 
+        NETWORK_DATA.CLIENT_INSTRUCTION= InstructionFromClient.NO_KILL_COW 
         if Game.checkIfMill(game.CurrentPlayer, Game.findCow(toPos, game.Board), game.AllBoardMills):
             game.Board = game.getCurrentBoard()
             printOut(game)
             killPos=killCow(game)
 
             NETWORK_DATA.toPos=killPos #use toPos as the kill Pos
-            NETWORK_DATA.CLIENT_INSTRUCTION= NETWORK_DATA.getClientInstructionValue(InstructionFromClient.KILL_COW)
+            NETWORK_DATA.CLIENT_INSTRUCTION= InstructionFromClient.KILL_COW
             
         send_instruction_to_server()
         process_instruction_from_server(game)
@@ -157,7 +157,7 @@ def main():
 
     PLAYER_ID = get_player_id()
     NETWORK_DATA.SERVER_INSTRUCTION = int(SOCKET.recv(1).decode())
-    if(NETWORK_DATA.SERVER_INSTRUCTION == NETWORK_DATA.getServerInstructionValue(InstructionFromServer.GAME_START)):
+    if(NETWORK_DATA.SERVER_INSTRUCTION == InstructionFromServer.GAME_START):
         startGame()
     else:
         print("Game failed to start\n")
