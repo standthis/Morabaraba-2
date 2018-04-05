@@ -4,13 +4,12 @@ from __main__ import *
 SERVER_PORT=5151
 BUFFER_SIZE= 1024
 
-class InstructionFromClient(Enum):
+class InstructionFromClient():
     PLAYER_MOVE = 0
     KILL_COW=1
     NO_KILL_COW=2
 
-
-class InstructionFromServer(Enum): 
+class InstructionFromServer(): 
     DO_NOTHING = 0
     MOVE_PIECE = 1
     REMOVE_PIECE = 2
