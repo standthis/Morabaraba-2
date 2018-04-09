@@ -1,13 +1,9 @@
-import data
-import os 
-
 class colors():
     GREEN = '\033[32m' 
     ENDC = '\033[00m'
     RED = '\033[31m'
 
 def printOut (game): 
-   # os.system('cls')
     print('\n' * 5, ' ' * 47, game.CurrentPlayer.Name + '\n')
     s = '''
                                     1   2   3       4      5   6   7
@@ -50,7 +46,5 @@ cowSay = colors.GREEN + '''
                                                               ||--|| *
                                                                
 
-                                               Press any key to play 
+                                               Press ENTER to play 
     ''' + colors.ENDC
-
-
