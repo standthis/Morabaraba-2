@@ -7,16 +7,15 @@ class ThePlayerState(Enum):
     PLACING = 1 
     FLYING = 2
 
-
 class Player:
-    def __init__(self, name, symbol, numberOfCows, playerState, cows, color,ID):
+    def __init__(self, name, symbol, numberOfCows, playerState, cows, color, ID):
         self.Name = color + name + colors.ENDC 
         self.Symbol = color + symbol + colors.ENDC 
         self.UnplayedCows = numberOfCows
         self.PlayerState = playerState 
         self.Cows = cows
         self.Color = color 
-        self.ID=ID
+        self.ID = ID
 
     def addCow(self, cow):
         cow.Symbol = self.Symbol
@@ -32,14 +31,15 @@ class Player:
     def changePlayerState(self, state):
         self.PlayerState = state
 
-
 class Cow: 
+    
     def __init__(self, pos, symbol, possibleMoves):
         self.Pos = pos 
         self.Symbol = symbol 
         self.PossibleMoves = possibleMoves 
 
 class Board:
+    
     A1 = Cow(('A', 1), ' ', [])
     A4 = Cow(('A', 4), ' ', [])
     A7 = Cow(('A', 7), ' ', [])
@@ -138,6 +138,7 @@ class Board:
         return allBoardMills
 
 class Game: 
+    
     def __init__(self, player1, player2, board, turn, allBoardMills):
         self.Player1 = player1
         self.Player2 = player2
@@ -150,6 +151,7 @@ class Game:
 
     def nextTurn(self):
         self.Turn = self.Alternator.__next__()
+        
         if self.Turn == 1:
             self.Player2 = self.CurrentPlayer
             self.CurrentPlayer = self.Player1
@@ -158,6 +160,7 @@ class Game:
             self.Player1 = self.CurrentPlayer
             self.CurrentPlayer = self.Player2
             self.OtherPlayer = self.Player1
+            
         self.Board = self.getCurrentBoard()
 
     def availableBoard(self):
@@ -202,7 +205,6 @@ class Game:
     def isMill(mill, cows):
         return len(Game.intersection(mill, cows)) == 3
 
-
     def checkIfMill(player, cow, allBoardMills):
         cows = copy.deepcopy(player.Cows)
         cows.append(cow)
@@ -214,15 +216,16 @@ class Game:
     def getPlayerMills(player, allBoardMills):
         return [mill for mill in allBoardMills if Game.isMill(mill, player.Cows)] 
         
-
     def possibleMove(self):
         player = self.OtherPlayer
         availableBoard = self.availableBoard()
+        
         if player.PlayerState == ThePlayerState.MOVING:
             for cow in player.Cows:
                 if len(Game.intersection(cow.PossibleMoves, availableBoard)) > 0:
                     return True 
             return False 
+        
         else:
             if len(availableBoard) == 0:
                 return False   
