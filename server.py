@@ -9,11 +9,11 @@ SERVER_SOCKET =socket.socket();
 NETWORK_DATA= Network_data()
 NUM_PLAYERS=0
 PLAYER_SOCK_ID=[]
-
+PORT=0
 def create_server_socket():
-    global SERVER_SOCKET
+    global SERVER_SOCKET, PORT
     HOST=socket.gethostbyname(socket.getfqdn())
-    print("Host: {0}\n".format(HOST))
+    print("IP address: {0}\n".format(HOST))
     PORT=socket.htons(SERVER_PORT)
     ADDR=(HOST,PORT)
     SERVER_SOCKET.bind(ADDR)
@@ -124,7 +124,7 @@ def main():
 
     create_server_socket()
     SERVER_SOCKET.listen(2)
-    print("Server Started\n")
+    print("Server Started on port {0} \n".format(PORT))
 
     while (NUM_PLAYERS < 2) :
         print("Waiting for clients...\n")
