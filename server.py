@@ -21,6 +21,7 @@ def create_server_socket():
 def write_to_player(whichPlayer):
     fromLet, fromNum = NETWORK_DATA.fromPos
     toLet, toPos = NETWORK_DATA.toPos
+    
     PLAYER_SOCK_ID[whichPlayer].send(str(NETWORK_DATA.CLIENT_INSTRUCTION).encode())
     PLAYER_SOCK_ID[whichPlayer].send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())
     PLAYER_SOCK_ID[whichPlayer].send(str(NETWORK_DATA.latest_player_id).encode())
@@ -126,7 +127,6 @@ def main():
     print("Game can now start!\n")
     
     #tell the players that the game can start
-
     NETWORK_DATA.SERVER_INSTRUCTION = InstructionFromServer.GAME_START
 
     PLAYER_SOCK_ID[0].send(str(NETWORK_DATA.SERVER_INSTRUCTION).encode())
