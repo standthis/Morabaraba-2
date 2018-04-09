@@ -2,8 +2,8 @@ from data import *
 from board import printOut, cowSay, colors   
 
 def localMain():
-    player1 = Player("player1", 'X', 12, ThePlayerState.PLACING, [], colors.GREEN, 0)
-    player2 = Player("player2", 'O', 12, ThePlayerState.PLACING, [], colors.RED, 1)
+    player1 = Player("Player 1", 'X', 12, ThePlayerState.PLACING, [], colors.GREEN, 0)
+    player2 = Player("Player 2", 'O', 12, ThePlayerState.PLACING, [], colors.RED, 1)
     board = Board()
     startboard = board.startBoard()
     allBoardMills = board.allBoardMills()
