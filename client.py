@@ -123,11 +123,21 @@ def startGame():
         runServerGame(game)
 
 def main():
+    morabarabaWord = '''
+                ___  ___                _                     _           
+                |  \/  |               | |                   | |          
+                | .  . | ___  _ __ __ _| |__   __ _ _ __ __ _| |__   __ _ 
+                | |\/| |/ _ \| '__/ _` | '_ \ / _` | '__/ _` | '_ \ / _` |
+                | |  | | (_) | | | (_| | |_) | (_| | | | (_| | |_) | (_| |
+                \_|  |_/\___/|_|  \__,_|_.__/ \__,_|_|  \__,_|_.__/ \__,_|
+    '''
+    print(morabarabaWord)
+    
     valid = False
     
     while not valid:
         try:
-            local = input("Are you playing locally?[Y/n] (q to quit): ")[0].upper()
+            local = input("                      Are you playing locally? [Y/n] (q to quit): ")[0].upper()
         except: 
             print("Please give a valid response!")
             continue

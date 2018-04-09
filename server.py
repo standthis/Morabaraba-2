@@ -13,7 +13,7 @@ PORT = 0
 def create_server_socket():
     global SERVER_SOCKET, PORT
     HOST = socket.gethostbyname(socket.getfqdn())
-    print("IP address: {0}\n".format(HOST))
+    print("                             IP address: {0}\n".format(HOST))
     PORT = socket.htons(SERVER_PORT)
     ADDR = (HOST,PORT)
     SERVER_SOCKET.bind(ADDR)
@@ -110,21 +110,31 @@ def startGame():
         runGameServer(game)
 
 def main():
+    morabarabaWord = '''
+                ___  ___                _                     _           
+                |  \/  |               | |                   | |          
+                | .  . | ___  _ __ __ _| |__   __ _ _ __ __ _| |__   __ _ 
+                | |\/| |/ _ \| '__/ _` | '_ \ / _` | '__/ _` | '_ \ / _` |
+                | |  | | (_) | | | (_| | |_) | (_| | | | (_| | |_) | (_| |
+                \_|  |_/\___/|_|  \__,_|_.__/ \__,_|_|  \__,_|_.__/ \__,_|
+    '''
+    print(morabarabaWord)
+    
     global NETWORK_DATA, SERVER_SOCKET, NUM_PLAYERS, PLAYER_SOCK_ID
 
     create_server_socket()
     SERVER_SOCKET.listen(2)
-    print("Server Started on port {0} \n".format(PORT))
+    print("                             Server Started on port {0} \n".format(PORT))
 
     while (NUM_PLAYERS < 2) :
-        print("Waiting for clients...\n")
+        print("                             Waiting for clients...\n")
         client_sock, client_addr = SERVER_SOCKET.accept() 
-        print("Got a connection from\n ", client_addr)
+        print("                             Got a connection from\n ", client_addr)
         PLAYER_SOCK_ID.append(client_sock)
         client_sock.send(str(NUM_PLAYERS).encode())
         NUM_PLAYERS += 1
 
-    print("Game can now start!\n")
+    print("                             Game can now start!\n")
     
     #tell the players that the game can start
     NETWORK_DATA.SERVER_INSTRUCTION = InstructionFromServer.GAME_START

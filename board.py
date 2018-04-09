@@ -4,7 +4,17 @@ class colors():
     RED = '\033[31m'
 
 def printOut (game): 
-    print('\n' * 5, ' ' * 33, 'PLAYER 1:', '\t' * 2, 'PLAYER 2:')
+    morabarabaWord = '''
+                        ___  ___                _                     _           
+                        |  \/  |               | |                   | |          
+                        | .  . | ___  _ __ __ _| |__   __ _ _ __ __ _| |__   __ _ 
+                        | |\/| |/ _ \| '__/ _` | '_ \ / _` | '__/ _` | '_ \ / _` |
+                        | |  | | (_) | | | (_| | |_) | (_| | | | (_| | |_) | (_| |
+                        \_|  |_/\___/|_|  \__,_|_.__/ \__,_|_|  \__,_|_.__/ \__,_|
+
+    '''
+    print('\n' * 5, morabarabaWord)
+    print(' ' * 33, 'PLAYER 1:', '\t' * 2, 'PLAYER 2:')
     print(' ' * 34, '---------', '\t' * 2, '---------')
     print(' ' * 34, 'Unplaced Cows: ', game.Player1.UnplayedCows, '\t', 'Unplaced Cows: ', game.Player2.UnplayedCows)
     print(' ' * 34, 'Cows Alive: ', len(game.Player1.Cows),'\t', 'Cows Alive: ', len(game.Player2.Cows))
