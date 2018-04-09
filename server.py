@@ -2,7 +2,7 @@ import socket
 from networkData import *
 from moraba import *
 from data import *
-from board import printOut, cowSay, colors
+from board import printOut, colors
 
 SERVER_SOCKET = socket.socket();
 NETWORK_DATA = Network_data()
