@@ -32,9 +32,7 @@ def printOut (game):
                                     |/              |             \|
                                 G  ({})-------------({})------------({})
     '''
-
     print(s.format(*[cow.Symbol for cow in game.Board]))
-
 
 cowSay = colors.GREEN + '''
                                                  ____________
