@@ -1,5 +1,4 @@
 SERVER_PORT = 5151
-BUFFER_SIZE = 1024
 
 class InstructionFromClient:
     PLAYER_MOVE = 0
