@@ -153,7 +153,7 @@ def main():
             valid = True
             
     global PLAYER_ID, SOCKET, NETWORK_DATA
-    ip_address = input("Please enter the ip address for the server:\n").strip()
+    ip_address = input("                      Please enter the ip address for the server:").strip()
     connect_to_server(ip_address)
     print("Connected!\n")
    
