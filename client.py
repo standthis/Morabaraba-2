@@ -139,7 +139,7 @@ def main():
         try:
             local = input("                      Are you playing locally? [Y/n] (q to quit): ")[0].upper()
         except: 
-            print("Please give a valid response!")
+            print("                      Please give a valid response!")
             continue
         
         if  local == 'Y' :
@@ -148,26 +148,26 @@ def main():
         elif local == 'Q':
             return
         elif local != 'N':
-            print("Please give a valid response!")
+            print("                      Please give a valid response!")
         else:
             valid = True
             
     global PLAYER_ID, SOCKET, NETWORK_DATA
     ip_address = input("                      Please enter the ip address for the server:").strip()
     connect_to_server(ip_address)
-    print("Connected!\n")
+    print("                      Connected!\n")
    
-    print("You are player {0}\n".format(PLAYER_ID + 1))
+    print("                      You are player {0}\n".format(PLAYER_ID + 1))
     
     if(PLAYER_ID == 0):
-        print("Waiting for second player...\n")
+        print("                      Waiting for second player...\n")
 
     NETWORK_DATA.SERVER_INSTRUCTION = int(SOCKET.recv(1).decode())
     
     if(NETWORK_DATA.SERVER_INSTRUCTION == InstructionFromServer.GAME_START):
         startGame()
     else:
-        print("Game failed to start\n")
+        print("                      Game failed to start\n")
         return 1
 
     SOCKET.close()
