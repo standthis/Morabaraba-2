@@ -156,12 +156,12 @@ def main():
     ip_address = input("Please enter the ip address for the server:\n").strip()
     connect_to_server(ip_address)
     print("Connected!\n")
+   
     print("You are player {0}\n".format(PLAYER_ID + 1))
     
     if(PLAYER_ID == 0):
         print("Waiting for second player...\n")
 
-    PLAYER_ID = get_player_id()
     NETWORK_DATA.SERVER_INSTRUCTION = int(SOCKET.recv(1).decode())
     
     if(NETWORK_DATA.SERVER_INSTRUCTION == InstructionFromServer.GAME_START):
