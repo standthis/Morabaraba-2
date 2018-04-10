@@ -92,6 +92,13 @@ def killCow(game):
     if Game.exist(pos, list(set(game.OtherPlayer.Cows) - set(cowsInMill))):
         game.OtherPlayer.removeCow(Game.findCow(pos, game.OtherPlayer.Cows))
         return pos
+    elif len(game.OtherPlayer.Cows) == len(cowsInMill):
+        if Game.exist(pos,game.OtherPlayers.Cows):
+            game.OtherPlayer.removeCow(Game.findCow(pos, game.OtherPlayer.Cows))
+            return pos
+        else:
+            print("invalid kill")
+            return killCow(game)
     else:
         print("invalid kill")
         return killCow(game)
