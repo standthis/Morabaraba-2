@@ -98,7 +98,7 @@ def runServerGame(game:Game):
         checkStateChange(game.OtherPlayer)
        
     else:
-        print("Currently {0}'s turn\n".format(game.CurrentPlayer.Name))
+        print("Currently {0}'s turn\n".format(game.CurrentPlayer.Name),flush=True)
         #wait to get response from server
         read_from_server() #read to check where other player placed
         process_instruction_from_server(game)
