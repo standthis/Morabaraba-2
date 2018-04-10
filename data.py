@@ -23,7 +23,8 @@ class Player:
         self.decrementCows()
 
     def decrementCows(self):
-        self.UnplayedCows -= 1
+        if self.UnplayedCows > 0:
+            self.UnplayedCows -= 1
 
     def removeCow(self, cow):
         self.Cows = Game.filterOut(self.Cows, cow.Pos)
