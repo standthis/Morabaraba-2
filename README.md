@@ -16,8 +16,8 @@ This game can either be played locally (with both players on the same computer) 
 	to enter the server's IP address (it's already displayed on the server's screen so simply enter that in).
 
 If playing on a server that is not on your local network. You need to follow these instructions:
-For the server:
- 1)	Enable port forwarding on your router of the server computer (use the port the server says it's open on)
- 2)	Use the TCP/IP protocol for the port forwarding
-For the client:
- 1)	Use the IP address of the server's router and not the server's local IP
+- For the server:
+	1)	Enable port forwarding on your router of the server computer (use the port the server says it's open on)
+	2)	Use the TCP/IP protocol for the port forwarding
+- For the client:
+	1)	Use the IP address of the server's router and not the server's local IP
