@@ -65,7 +65,7 @@ def process_instruction_from_server(game:Game):
         print("{0} just shot your cow at {1}".format(game.CurrentPlayer.Name, toPos))     
         game.OtherPlayer.removeCow(Game.findCow(toPos, game.OtherPlayer.Cows))
     else:      
-        print("Invalid instruction !\n", NETWORK_DATA.SERVER_INSTRUCTION);
+        print("Invalid instruction!\n", NETWORK_DATA.SERVER_INSTRUCTION);
     
 def runServerGame(game:Game):
     game.nextTurn()
@@ -153,7 +153,7 @@ def main():
             valid = True
             
     global PLAYER_ID, SOCKET, NETWORK_DATA
-    ip_address = input("                      Please enter the ip address for the server:").strip()
+    ip_address = input("                      Please enter the IP address for the server: ").strip()
     connect_to_server(ip_address)
     print("                      Connected!\n")
    
