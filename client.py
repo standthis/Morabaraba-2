@@ -156,7 +156,7 @@ def main():
     ip_address = input("                      Please enter the IP address for the server: ").strip()
     connect_to_server(ip_address)
     print("                      Connected!\n")
-   
+    PLAYER_ID= get_player_id() 
     print("                      You are player {0}\n".format(PLAYER_ID + 1))
     
     if(PLAYER_ID == 0):
