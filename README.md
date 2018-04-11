@@ -1,6 +1,15 @@
 # Morabaraba-2 recreated in python
 
-This game can either be played locally, with both players on the same computer, or on a server. 
+             ___  ___                _                     _           
+             |  \/  |               | |                   | |          
+             | .  . | ___  _ __ __ _| |__   __ _ _ __ __ _| |__   __ _ 
+             | |\/| |/ _ \| '__/ _` | '_ \ / _` | '__/ _` | '_ \ / _` |
+             | |  | | (_) | | | (_| | |_) | (_| | | | (_| | |_) | (_| |
+             \_|  |_/\___/|_|  \__,_|_.__/ \__,_|_|  \__,_|_.__/ \__,_|
+
+Basic game rules can be found here: https://en.wikipedia.org/wiki/Morabaraba
+
+This game can either be played locally (with both players on the same computer) or on a server. 
 
 To play locally, simply run client.py where you'll be asked if you want to play locally and simply enter Y for yes.
 
